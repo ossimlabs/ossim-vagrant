@@ -15,17 +15,40 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder ".", "/vagrant", type: "nfs"
   config.vm.synced_folder "salt", "/srv/salt", type: "nfs"
   config.vm.synced_folder "pillar", "/srv/pillar", type: "nfs"
-  #config.vm.synced_folder "/data", "/data", type: "nfs"
+  config.vm.synced_folder "/data", "/data", type: "nfs"
   config.vm.provider "virtualbox" do |vb|
      vb.memory = "2048"
   end
 
   config.vm.define "ossimCore" do |ossimCore|
-    ossimCore.vm.network "private_network", ip: "192.168.33.100"
+    ossimCore.vm.network "private_network", ip: "192.168.2.100"
     ossimCore.vm.hostname = "ossim-core.local"
-
     ossimCore.vm.provision :salt do |salt|
       salt.minion_id = "ossim-core.local"
+      salt.masterless = true
+      salt.run_highstate = true
+      salt.log_level = "all"
+    end
+  end
+
+  config.vm.define "ossimGeocell" do |ossimGeocell|
+    ossimGeocell.vm.network "private_network", ip: "192.168.2.101"
+    ossimGeocell.vm.hostname = "ossim-core.local"
+    ossimGeocell.ssh.forward_x11 = true
+    ossimGeocell.vm.provision :salt do |salt|
+      salt.minion_id = "ossim-geocell.local"
+      salt.masterless = true
+      salt.run_highstate = true
+      salt.log_level = "all"
+    end
+  end
+
+  config.vm.define "omarApp" do |omarApp|
+    omarApp.vm.network "private_network", ip: "192.168.2.101"
+    omarApp.vm.hostname = "ossim-core.local"
+    omarApp.ssh.forward_x11 = true
+    omarApp.vm.provision :salt do |salt|
+      salt.minion_id = "omar-app.local"
       salt.masterless = true
       salt.run_highstate = true
       salt.log_level = "all"

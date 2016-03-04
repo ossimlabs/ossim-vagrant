@@ -13,6 +13,7 @@ intall-ossim-core:
       - ossim-web-plugin
     - require:
       - pkgrepo: ossim-yum-repo
+
 ossim-yum-repo:
   pkgrepo.managed:
     - humanname: OSSIM-Yum-Repo
