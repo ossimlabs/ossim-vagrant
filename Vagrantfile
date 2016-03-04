@@ -32,17 +32,5 @@ Vagrant.configure(2) do |config|
     end
   end
 
-  # config.vm.define "ossimCore2" do |ossimCore2|
-  #   ossimCore2.vm.network "private_network", ip: "192.168.33.101"
-  #   ossimCore2.vm.hostname = "ossim-core2.local"
-
-  #   ossimCore2.vm.provision :salt do |salt|
-  #     salt.minion_id = "ossim-core2.local"
-  #     salt.masterless = true
-  #     salt.run_highstate = true
-  #     salt.log_level = "all"
-  #   end
-#  end
-
   #config.vm.provision "shell", path: "postup.sh"
 end
