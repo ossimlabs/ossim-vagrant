@@ -15,6 +15,7 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder ".", "/vagrant", type: "nfs"
   config.vm.synced_folder "salt", "/srv/salt", type: "nfs"
   config.vm.synced_folder "pillar", "/srv/pillar", type: "nfs"
+  config.vm.synced_folder "formulas", "/srv/formulas", type: "nfs"
   config.vm.synced_folder "/data", "/data", type: "nfs"
   config.vm.provider "virtualbox" do |vb|
      vb.memory = "2048"
@@ -44,8 +45,8 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define "omarApp" do |omarApp|
-    omarApp.vm.network "private_network", ip: "192.168.2.101"
-    omarApp.vm.hostname = "ossim-core.local"
+    omarApp.vm.network "private_network", ip: "192.168.2.102"
+    omarApp.vm.hostname = "omar-app.local"
     omarApp.ssh.forward_x11 = true
     omarApp.vm.provision :salt do |salt|
       salt.minion_id = "omar-app.local"
@@ -54,6 +55,8 @@ Vagrant.configure(2) do |config|
       salt.log_level = "all"
     end
   end
+
+
 
   #config.vm.provision "shell", path: "postup.sh"
 end
