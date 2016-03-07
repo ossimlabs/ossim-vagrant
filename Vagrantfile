@@ -21,23 +21,35 @@ Vagrant.configure(2) do |config|
      vb.memory = "2048"
   end
 
-  config.vm.define "ossimCore" do |ossimCore|
-    ossimCore.vm.network "private_network", ip: "192.168.2.100"
-    ossimCore.vm.hostname = "ossim-core.local"
-    ossimCore.vm.provision :salt do |salt|
-      salt.minion_id = "ossim-core.local"
-      salt.masterless = true
-      salt.run_highstate = true
-      salt.log_level = "all"
-    end
-  end
+  # config.vm.define "ossimCore" do |ossimCore|
+  #   ossimCore.vm.network "private_network", ip: "192.168.2.100"
+  #   ossimCore.vm.hostname = "ossim-core.local"
+  #   ossimCore.vm.provision :salt do |salt|
+  #     salt.minion_id = "ossim-core.local"
+  #     salt.masterless = true
+  #     salt.run_highstate = true
+  #     salt.log_level = "all"
+  #   end
+  # end
 
-  config.vm.define "ossimGeocell" do |ossimGeocell|
-    ossimGeocell.vm.network "private_network", ip: "192.168.2.101"
-    ossimGeocell.vm.hostname = "ossim-core.local"
-    ossimGeocell.ssh.forward_x11 = true
-    ossimGeocell.vm.provision :salt do |salt|
-      salt.minion_id = "ossim-geocell.local"
+  # config.vm.define "ossimGeocell" do |ossimGeocell|
+  #   ossimGeocell.vm.network "private_network", ip: "192.168.2.101"
+  #   ossimGeocell.vm.hostname = "ossim-core.local"
+  #   ossimGeocell.ssh.forward_x11 = true
+  #   ossimGeocell.vm.provision :salt do |salt|
+  #     salt.minion_id = "ossim-geocell.local"
+  #     salt.masterless = true
+  #     salt.run_highstate = true
+  #     salt.log_level = "all"
+  #   end
+  # end
+
+  config.vm.define "postgres" do |postgres|
+    postgres.vm.network "private_network", ip: "192.168.2.100"
+    postgres.vm.hostname = "postgres.local"
+    postgres.ssh.forward_x11 = false
+    postgres.vm.provision :salt do |salt|
+      salt.minion_id = "postgres.local"
       salt.masterless = true
       salt.run_highstate = true
       salt.log_level = "all"
@@ -45,9 +57,9 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define "omarApp" do |omarApp|
-    omarApp.vm.network "private_network", ip: "192.168.2.102"
+    omarApp.vm.network "private_network", ip: "192.168.2.101"
     omarApp.vm.hostname = "omar-app.local"
-    omarApp.ssh.forward_x11 = true
+    omarApp.ssh.forward_x11 = false
     omarApp.vm.provision :salt do |salt|
       salt.minion_id = "omar-app.local"
       salt.masterless = true
@@ -55,8 +67,6 @@ Vagrant.configure(2) do |config|
       salt.log_level = "all"
     end
   end
-
-
 
   #config.vm.provision "shell", path: "postup.sh"
 end
