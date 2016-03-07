@@ -1,0 +1,88 @@
+grails:
+  serverURL: {{ pillar['ossim']['omar-app']['url'] }}
+
+wfs:
+  featureTypeNamespaces:
+      - prefix: omar
+        uri: http://omar.ossim.org
+
+  datastores:
+      - namespaceId: omar
+        datastoreId: {{ pillar['ossim']['database']['name'] }}
+        datastoreParams:
+          dbtype: postgis
+          host: {{ pillar['ossim']['database']['host'] }}
+          port: '5432'
+          database: {{ pillar['ossim']['database']['name'] }}
+          user: postgres
+          passwd: postgres
+          'Expose primary keys': 'true'
+          namespace: http://omar.ossim.org
+
+  featureTypes:
+      - name: raster_entry
+        title: raster_entry
+        description: ''
+        keywords:
+          - omar
+          - raster_entry
+          - features
+        datastoreId: {{ pillar['ossim']['database']['name'] }}
+
+      - name: video_data_set
+        title: video_data_set
+        description: ''
+        keywords:
+          - omar
+          - video_data_set
+          - features
+        datastoreId: {{ pillar['ossim']['database']['name'] }}
+
+omar:
+  app:
+    root:
+      baseUrl: http://192.168.2.103/
+    wfs:
+      baseUrl: /wfs?
+      enabled: true
+      proxy: /proxy/index?url=
+    wms:
+      baseUrl: /wms?
+      enabled: true
+    imageSpace:
+      baseUrl: /imageSpace/
+      enabled: true
+    thumbnails:
+      baseUrl: /imageSpace/getThumbnail?
+    footprints:
+      baseUrl: /footprints/getFootprints
+    kmlApp:
+      baseUrl: http://o2.ossim.org/superoverlay-app
+    predio:
+      baseUrl: /predio/
+      enabled: true
+    twofishes:
+      baseUrl: http://localhost:9096/twofish
+      proxy: /twoFishesProxy
+    swipeApp:
+#    basemaps:
+#      osm:
+#        baseUrl: http://geoserver-demo01.dev.ossim.org/geoserver/ged/wms?
+#        layers: osm-group
+    misc:
+      icons:
+        green-marker: search_marker_green.png
+  predio:
+  wms:
+    mosaic:
+      maxCount: 10
+      sort:
+        -
+          - "acquisition_date"
+          - "DESC"
+
+environments:
+  production:
+    dataSource:
+      dbCreate: update
+      url: {{ pillar['ossim']['database']['connection'] }}
