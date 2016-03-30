@@ -68,5 +68,29 @@ Vagrant.configure(2) do |config|
     end
   end
 
+  config.vm.define "workflow" do |workflow|
+    workflow.vm.network "private_network", ip: "192.168.2.102"
+    workflow.vm.hostname = "workflow.local"
+    workflow.ssh.forward_x11 = true
+    workflow.vm.provision :salt do |salt|
+      salt.minion_id = "workflow.local"
+      salt.masterless = true
+      salt.run_highstate = true
+      salt.log_level = "all"
+    end
+  end
+  
+  config.vm.define "yumcache" do |yumcache|
+    yumcache.vm.network "private_network", ip: "192.168.2.103"
+    yumcache.vm.hostname = "yumcache.local"
+    yumcache.ssh.forward_x11 = false
+    yumcache.vm.provision :salt do |salt|
+      salt.minion_id = "yumcache.local"
+      salt.masterless = true
+      salt.run_highstate = true
+      salt.log_level = "all"
+    end
+  end
+
   #config.vm.provision "shell", path: "postup.sh"
 end
