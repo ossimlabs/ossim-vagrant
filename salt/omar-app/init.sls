@@ -10,7 +10,7 @@ install-omar-app:
       - user
       - group
 
-/opt/ossimlabs/omar-app/omar-app.yml:
+/usr/share/omar/omar-app/omar-app.yml:
   file.managed:
     - source: salt://omar-app/omar-app.yml
     - template: jinja

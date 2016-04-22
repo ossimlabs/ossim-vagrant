@@ -65,6 +65,7 @@ Vagrant.configure(2) do |config|
       salt.masterless = true
       salt.run_highstate = true
       salt.log_level = "all"
+      salt.verbose = true
     end
   end
 
