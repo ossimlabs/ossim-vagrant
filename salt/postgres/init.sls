@@ -73,8 +73,9 @@ postgresql-create-extension:
       - cmd: postgresql-createdb
 
 
-iptables:
+iptables-dead:
   service.dead:
+    - name: iptables
     - enable: False
     - reload: False
 

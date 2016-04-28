@@ -1,5 +1,6 @@
 ossim:
   yum_repo: http://s3.amazonaws.com/o2-rpms
+  dependencies: http://s3.amazonaws.com/ossimlabs/dependencies
   database: 
     name: omardb-prod
     host: 192.168.2.100
@@ -12,4 +13,4 @@ ossim:
   wmts-app:
      wfsUrl: http://o2.ossim.org/o2/wfs
      wmsUrl: http://o2.ossim.org/o2/wms
-     oldmarWmsFlag: false
+     legacyWmsFlag: false
