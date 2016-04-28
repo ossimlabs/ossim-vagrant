@@ -13,9 +13,9 @@ else
 fi
 
 if [ -z $APP_PID ]; then
-java $JAVA_OPTS -jar ${SCRIPT_DIR}/wmts-app.jar --spring.config.location=${SCRIPT_DIR}/wmts-app.yml
+java $JAVA_OPTS -jar ${SCRIPT_DIR}/wms-app.jar --spring.config.location=${SCRIPT_DIR}/wms-app.yml
 else
-java $JAVA_OPTS -jar ${SCRIPT_DIR}/wmts-app.jar --spring.config.location=${SCRIPT_DIR}/wmts-app.yml&
+java $JAVA_OPTS -jar ${SCRIPT_DIR}/wms-app.jar --spring.config.location=${SCRIPT_DIR}/wms-app.yml&
 sleep 1
 echo $! >$APP_PID
 fi

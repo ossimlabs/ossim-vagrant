@@ -21,30 +21,10 @@ Vagrant.configure(2) do |config|
      vb.memory = "2048"
   end
 
-  # config.vm.define "ossimCore" do |ossimCore|
-  #   ossimCore.vm.network "private_network", ip: "192.168.2.100"
-  #   ossimCore.vm.hostname = "ossim-core.local"
-  #   ossimCore.vm.provision :salt do |salt|
-  #     salt.minion_id = "ossim-core.local"
-  #     salt.masterless = true
-  #     salt.run_highstate = true
-  #     salt.log_level = "all"
-  #   end
-  # end
-
-  # config.vm.define "ossimGeocell" do |ossimGeocell|
-  #   ossimGeocell.vm.network "private_network", ip: "192.168.2.101"
-  #   ossimGeocell.vm.hostname = "ossim-core.local"
-  #   ossimGeocell.ssh.forward_x11 = true
-  #   ossimGeocell.vm.provision :salt do |salt|
-  #     salt.minion_id = "ossim-geocell.local"
-  #     salt.masterless = true
-  #     salt.run_highstate = true
-  #     salt.log_level = "all"
-  #   end
-  # end
-
   config.vm.define "postgres" do |postgres|
+    config.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+    end
     postgres.vm.network "private_network", ip: "192.168.2.100"
     postgres.vm.hostname = "postgres.local"
     postgres.ssh.forward_x11 = false
@@ -52,11 +32,14 @@ Vagrant.configure(2) do |config|
       salt.minion_id = "postgres.local"
       salt.masterless = true
       salt.run_highstate = true
-      salt.log_level = "all"
+#      salt.log_level = "all"
     end
   end
 
   config.vm.define "wmtsApp" do |wmtsApp|
+    config.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+    end
     wmtsApp.vm.network "private_network", ip: "192.168.2.101"
     wmtsApp.vm.hostname = "wmts-app.local"
     wmtsApp.ssh.forward_x11 = false
@@ -69,42 +52,45 @@ Vagrant.configure(2) do |config|
     end
   end
 
-  config.vm.define "omarApp" do |omarApp|
-    omarApp.vm.network "private_network", ip: "192.168.2.109"
-    omarApp.vm.hostname = "omar-app.local"
-    omarApp.ssh.forward_x11 = false
-    omarApp.vm.provision :salt do |salt|
-      salt.minion_id = "omar-app.local"
+  config.vm.define "wmsApp" do |wmsApp|
+    config.vm.provider "virtualbox" do |vb|
+      vb.memory = "2048"
+    end
+    wmsApp.vm.network "private_network", ip: "192.168.2.101"
+    wmsApp.vm.hostname = "wms-app.local"
+    wmsApp.ssh.forward_x11 = false
+    wmsApp.vm.provision :salt do |salt|
+      salt.minion_id = "wms-app.local"
       salt.masterless = true
       salt.run_highstate = true
-      salt.log_level = "all"
-      salt.verbose = true
     end
   end
 
-  config.vm.define "workflow" do |workflow|
-    workflow.vm.network "private_network", ip: "192.168.2.110"
-    workflow.vm.hostname = "workflow.local"
-    workflow.ssh.forward_x11 = true
-    workflow.vm.provision :salt do |salt|
-      salt.minion_id = "workflow.local"
-      salt.masterless = true
-      salt.run_highstate = true
-      salt.log_level = "all"
-    end
-  end
+
+#  config.vm.define "omarApp" do |omarApp|
+#    omarApp.vm.network "private_network", ip: "192.168.2.109"
+#    omarApp.vm.hostname = "omar-app.local"
+#    omarApp.ssh.forward_x11 = false
+#    omarApp.vm.provision :salt do |salt|
+#      salt.minion_id = "omar-app.local"
+#      salt.masterless = true
+#      salt.run_highstate = true
+#      salt.log_level = "all"
+#      salt.verbose = true
+#    end
+#  end
+
+#  config.vm.define "workflow" do |workflow|
+#    workflow.vm.network "private_network", ip: "192.168.2.110"
+#    workflow.vm.hostname = "workflow.local"
+#    workflow.ssh.forward_x11 = true
+#    workflow.vm.provision :salt do |salt|
+#      salt.minion_id = "workflow.local"
+#      salt.masterless = true
+#      salt.run_highstate = true
+#      salt.log_level = "all"
+#    end
+#  end
   
-  config.vm.define "yumcache" do |yumcache|
-    yumcache.vm.network "private_network", ip: "192.168.2.120"
-    yumcache.vm.hostname = "yumcache.local"
-    yumcache.ssh.forward_x11 = false
-    yumcache.vm.provision :salt do |salt|
-      salt.minion_id = "yumcache.local"
-      salt.masterless = true
-      salt.run_highstate = true
-      salt.log_level = "all"
-    end
-  end
-
   #config.vm.provision "shell", path: "postup.sh"
 end
