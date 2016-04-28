@@ -3,8 +3,9 @@ install-wmts-app:
     - pkgs:
       - o2-wmts-app
 
-/usr/share/omar/wmts-app/wmts-app.yml:
+wmts-app-config:
   file.managed:
+    - name: /usr/share/omar/wmts-app/wmts-app.yml 
     - source: salt://wmts-app/wmts-app.yml
     - template: jinja
     - user: omar
@@ -12,8 +13,9 @@ install-wmts-app:
     - require:
       - pkg: install-wmts-app
 
-/usr/share/omar/wmts-app/wmts-app.sh:
+wmts-app-shell:
   file.managed:
+    - name: /usr/share/omar/wmts-app/wmts-app.sh
     - source: salt://wmts-app/wmts-app.sh
     - template: jinja
     - user: omar
@@ -22,8 +24,9 @@ install-wmts-app:
     - require:
       - pkg: install-wmts-app
 
-/usr/share/omar/wmts-app:
+wmts-app-dir-perms:
   file.directory:
+    - name: /usr/share/omar/wmts-app 
     - user: omar
     - group: omar
     - mode: 755    
@@ -33,7 +36,7 @@ install-wmts-app:
     - require:
       - pkg: install-wmts-app
 
-service-wrapper:
+wmts-app-service-wrapper:
   file.managed:
     - name: /etc/init.d/wmts-app
     - mode: 755    
@@ -43,7 +46,7 @@ service-wrapper:
 # replace the contents between the marker 
 # with the user and program name
 #
-service-wrapper-replace-block:
+wmts-app-service-wrapper-replace-block:
   file.blockreplace:
     - name: /etc/init.d/wmts-app
     - marker_start: "#MARKER_START salt managed do not remove"
@@ -54,9 +57,9 @@ service-wrapper-replace-block:
         PROG_GROUP="omar"
     - require:
       - pkg: install-wmts-app
-      - file: service-wrapper
+      - file: wmts-app-service-wrapper
 
-wmts-iptables:
+wmts-app-iptables:
   iptables.insert:
     - position: 1
     - table: filter
@@ -68,32 +71,26 @@ wmts-iptables:
     - proto: tcp
     - save: True
 
-wmts-iptables-dead:
+wmts-app-iptables-dead:
   service.dead:
     - name: iptables
     - require:
-      - iptables: wmts-iptables
-    # - enable: false
-    # - reload: false
-    # - watch:
-    #   - iptables: wmts-iptables
-    # - require:
-    #   - iptables: wmts-iptables
-wmts-iptables-running:
+      - iptables: wmts-app-iptables
+
+wmts-app-iptables-running:
   service.running:
     - name: iptables
     - enable: true
     - reload: true
     - require:
-      - service: wmts-iptables-dead
+      - service: wmts-app-iptables-dead
 
-wmts-service:
+wmts-app-service:
   service.running:
     - name: wmts-app
     - enable: true
     - reload: true
     - require:
-      - file: service-wrapper-replace-block
-    # - watch: 
-    #   - file: service-wrapper-replace-block
+      - service: wmts-app-iptables-running
+      - file: wmts-app-service-wrapper-replace-block
 

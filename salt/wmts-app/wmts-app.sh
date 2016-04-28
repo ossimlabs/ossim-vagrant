@@ -8,7 +8,6 @@ export JAVA_OPTS="-server -Xms256m -Xmx2048m -Djava.awt.headless=true -XX:+CMSCl
 
 if [ -z $WORKING_DIR ]; then
    pushd $SCRIPT_DIR
-   echo "WORKING DIR IS NOT THERE!!!!!!!!!!!!"
 else
    pushd $WORKING_DIR
 fi
