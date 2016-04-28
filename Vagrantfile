@@ -52,19 +52,19 @@ Vagrant.configure(2) do |config|
     end
   end
 
-  config.vm.define "wmsApp" do |wmsApp|
-    config.vm.provider "virtualbox" do |vb|
-      vb.memory = "2048"
-    end
-    wmsApp.vm.network "private_network", ip: "192.168.2.101"
-    wmsApp.vm.hostname = "wms-app.local"
-    wmsApp.ssh.forward_x11 = false
-    wmsApp.vm.provision :salt do |salt|
-      salt.minion_id = "wms-app.local"
-      salt.masterless = true
-      salt.run_highstate = true
-    end
-  end
+  # config.vm.define "wmsApp" do |wmsApp|
+  #   config.vm.provider "virtualbox" do |vb|
+  #     vb.memory = "2048"
+  #   end
+  #   wmsApp.vm.network "private_network", ip: "192.168.2.101"
+  #   wmsApp.vm.hostname = "wms-app.local"
+  #   wmsApp.ssh.forward_x11 = false
+  #   wmsApp.vm.provision :salt do |salt|
+  #     salt.minion_id = "wms-app.local"
+  #     salt.masterless = true
+  #     salt.run_highstate = true
+  #   end
+  # end
 
 
 #  config.vm.define "omarApp" do |omarApp|
