@@ -9,3 +9,7 @@ ossim:
     url: http://192.168.2.101:8080/
     host: 192.168.2.101
     port: 8080
+  wmts-app:
+     wfsUrl: http://o2.ossim.org/o2/wfs
+     wmsUrl: http://o2.ossim.org/o2/wms
+     oldmarWmsFlag: false

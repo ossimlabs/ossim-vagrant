@@ -19,4 +19,9 @@ base:
     - omar-user
     - ossim-core
     - omar-app
+  'wmts-app.local':
+    - java
+    - ossim-core.yum-repo
+    - omar-user
+    - wmts-app
 

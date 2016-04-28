@@ -56,8 +56,21 @@ Vagrant.configure(2) do |config|
     end
   end
 
+  config.vm.define "wmtsApp" do |wmtsApp|
+    wmtsApp.vm.network "private_network", ip: "192.168.2.101"
+    wmtsApp.vm.hostname = "wmts-app.local"
+    wmtsApp.ssh.forward_x11 = false
+    wmtsApp.vm.provision :salt do |salt|
+      salt.minion_id = "wmts-app.local"
+      salt.masterless = true
+      salt.run_highstate = true
+#      salt.log_level = "all"
+#      salt.verbose = true
+    end
+  end
+
   config.vm.define "omarApp" do |omarApp|
-    omarApp.vm.network "private_network", ip: "192.168.2.101"
+    omarApp.vm.network "private_network", ip: "192.168.2.109"
     omarApp.vm.hostname = "omar-app.local"
     omarApp.ssh.forward_x11 = false
     omarApp.vm.provision :salt do |salt|
@@ -70,7 +83,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define "workflow" do |workflow|
-    workflow.vm.network "private_network", ip: "192.168.2.102"
+    workflow.vm.network "private_network", ip: "192.168.2.110"
     workflow.vm.hostname = "workflow.local"
     workflow.ssh.forward_x11 = true
     workflow.vm.provision :salt do |salt|
@@ -82,7 +95,7 @@ Vagrant.configure(2) do |config|
   end
   
   config.vm.define "yumcache" do |yumcache|
-    yumcache.vm.network "private_network", ip: "192.168.2.103"
+    yumcache.vm.network "private_network", ip: "192.168.2.120"
     yumcache.vm.hostname = "yumcache.local"
     yumcache.ssh.forward_x11 = false
     yumcache.vm.provision :salt do |salt|

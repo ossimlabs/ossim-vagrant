@@ -1,0 +1,5 @@
+omar:
+  wmts:
+    wfsUrl: {{ salt['pillar.get']('ossim:wmts-app:wfsUrl')}}
+    wmsUrl: {{ salt['pillar.get']('ossim:wmts-app:wmsUrl')}}
+    oldmarWmsFlag: {{ salt['pillar.get']('ossim:wmts-app:oldmarWmsFlag')}}
