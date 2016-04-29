@@ -16,8 +16,8 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder "salt", "/srv/salt", type: "nfs"
   config.vm.synced_folder "pillar", "/srv/pillar", type: "nfs"
   config.vm.synced_folder "formulas", "/srv/formulas", type: "nfs"
-  #config.vm.synced_folder "/data", "/data", type: "nfs"
-  config.vm.synced_folder "/Volumes/DataDrive/data", "/data", type: "nfs"
+  config.vm.synced_folder "/data", "/data", type: "nfs"
+  #config.vm.synced_folder "/Volumes/DataDrive/data", "/data", type: "nfs"
   config.vm.provider "virtualbox" do |vb|
      vb.memory = "2048"
   end
