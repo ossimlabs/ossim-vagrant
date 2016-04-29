@@ -9,7 +9,13 @@ base:
   'wms-app.local':
     - java
     - ossim-core
+    - omar-user
     - wms-app
+  'stager-app.local':
+    - java
+    - ossim-core
+    - omar-user
+    - stager-app
   'workflow.local':
     - postgres
     - java7

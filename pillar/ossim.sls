@@ -1,4 +1,6 @@
 ossim:
+  user: omar
+  group: omar
   yum_repo: http://s3.amazonaws.com/o2-rpms
   dependencies: http://s3.amazonaws.com/ossimlabs/dependencies
   database: 

@@ -15,8 +15,9 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder ".", "/vagrant", type: "nfs"
   config.vm.synced_folder "salt", "/srv/salt", type: "nfs"
   config.vm.synced_folder "pillar", "/srv/pillar", type: "nfs"
-  # config.vm.synced_folder "formulas", "/srv/formulas", type: "nfs"
-  config.vm.synced_folder "/data", "/data", type: "nfs"
+  config.vm.synced_folder "formulas", "/srv/formulas", type: "nfs"
+  #config.vm.synced_folder "/data", "/data", type: "nfs"
+  config.vm.synced_folder "/Volumes/DataDrive/data", "/data", type: "nfs"
   config.vm.provider "virtualbox" do |vb|
      vb.memory = "2048"
   end
@@ -38,7 +39,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.define "wmtsApp" do |wmtsApp|
     config.vm.provider "virtualbox" do |vb|
-      vb.memory = "1024"
+      vb.memory = "2048"
     end
     wmtsApp.vm.network "private_network", ip: "192.168.2.101"
     wmtsApp.vm.hostname = "wmts-app.local"
@@ -65,6 +66,20 @@ Vagrant.configure(2) do |config|
   #     salt.run_highstate = true
   #   end
   # end
+
+  config.vm.define "stagerApp" do |stagerApp|
+    config.vm.provider "virtualbox" do |vb|
+       vb.memory = "2048"
+    end
+    stagerApp.vm.network "private_network", ip: "192.168.2.102"
+    stagerApp.vm.hostname = "stager-app.local"
+    stagerApp.ssh.forward_x11 = false
+    stagerApp.vm.provision :salt do |salt|
+      salt.minion_id = "stager-app.local"
+      salt.masterless = true
+      salt.run_highstate = true
+    end
+  end
 
 
 #  config.vm.define "omarApp" do |omarApp|

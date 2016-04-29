@@ -8,3 +8,4 @@ environments:
       password:
       dialect: 'org.hibernate.spatial.dialect.postgis.PostgisDialect'
       url: {{ salt['pillar.get']('ossim:database:connection')}}
+
