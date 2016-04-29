@@ -1,0 +1,13 @@
+environments:
+  production:
+    dataSource:
+      pooled: true
+      jmxExport: true
+      driverClassName: org.postgresql.Driver
+      username: postgres
+      password:
+      dialect: 'org.hibernate.spatial.dialect.postgis.PostgisDialect'
+      url: {{ salt['pillar.get']('ossim:database:connection')}}
+
+quartz:
+    jdbcStore: false
