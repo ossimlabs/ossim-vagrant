@@ -16,6 +16,11 @@ base:
     - ossim-core
     - omar-user
     - wfs-app
+  'superoverlay-app.local':
+    - java
+    - ossim-core
+    - omar-user
+    - superoverlay-app
   'stager-app.local':
     - java
     - ossim-core

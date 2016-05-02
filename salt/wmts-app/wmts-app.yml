@@ -19,3 +19,6 @@ grails:
   serverURL: {{ salt['pillar.get']('ossim:wmts-app:serverURL')}}
   assets:
     url: {{ salt['pillar.get']('ossim:wmts-app:assetsURL')}}
+server:
+  port: 8080
+  contextPath: ""

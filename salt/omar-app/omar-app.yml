@@ -9,8 +9,6 @@ environments:
       dialect: 'org.hibernate.spatial.dialect.postgis.PostgisDialect'
       url: {{ salt['pillar.get']('ossim:database:connection')}}
 
-
-
 omar:
   app:
     root:
@@ -30,7 +28,7 @@ omar:
     footprints:
       baseUrl: http://192.168.2.104:8080/footprints/getFootprints
     kmlApp:
-      baseUrl: http://o2.ossim.org/superoverlay-app
+      baseUrl: http://192.168.2.105:8080
     predio:
       baseUrl: /predio/
       enabled: false

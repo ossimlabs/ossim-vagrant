@@ -63,4 +63,5 @@ wmts-app-service:
     - reload: false
     - watch:
       - file: wmts-app-service-wrapper
+      - file: wmts-app-config
 

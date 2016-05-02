@@ -63,4 +63,5 @@ wms-app-service:
     - reload: false
     - watch:
       - file: wms-app-service-wrapper
+      - file: wms-app-config
 

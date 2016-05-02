@@ -40,7 +40,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.define "wmtsApp" do |wmtsApp|
     config.vm.provider "virtualbox" do |vb|
-      vb.memory = "2048"
+      vb.memory = "1024"
     end
     wmtsApp.vm.network "private_network", ip: "192.168.2.101"
     wmtsApp.vm.hostname = "wmts-app.local"
@@ -56,7 +56,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.define "stagerApp" do |stagerApp|
     config.vm.provider "virtualbox" do |vb|
-       vb.memory = "2048"
+       vb.memory = "1024"
     end
     stagerApp.vm.network "private_network", ip: "192.168.2.102"
     stagerApp.vm.hostname = "stager-app.local"
@@ -72,7 +72,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.define "wmsApp" do |wmsApp|
     config.vm.provider "virtualbox" do |vb|
-      vb.memory = "2048"
+      vb.memory = "1024"
     end
     wmsApp.vm.network "private_network", ip: "192.168.2.103"
     wmsApp.vm.hostname = "wms-app.local"
@@ -88,13 +88,29 @@ Vagrant.configure(2) do |config|
 
   config.vm.define "wfsApp" do |wfsApp|
     config.vm.provider "virtualbox" do |vb|
-      vb.memory = "2048"
+      vb.memory = "1024"
     end
     wfsApp.vm.network "private_network", ip: "192.168.2.104"
     wfsApp.vm.hostname = "wfs-app.local"
     wfsApp.ssh.forward_x11 = false
     wfsApp.vm.provision :salt do |salt|
       salt.minion_id = "wfs-app.local"
+      salt.masterless = true
+      salt.run_highstate = true
+#     salt.log_level = "all"
+#     salt.verbose = true
+    end
+  end
+
+  config.vm.define "superoverlayApp" do |superoverlayApp|
+    config.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+    end
+    superoverlayApp.vm.network "private_network", ip: "192.168.2.105"
+    superoverlayApp.vm.hostname = "superoverlay-app.local"
+    superoverlayApp.ssh.forward_x11 = false
+    superoverlayApp.vm.provision :salt do |salt|
+      salt.minion_id = "superoverlay-app.local"
       salt.masterless = true
       salt.run_highstate = true
 #     salt.log_level = "all"

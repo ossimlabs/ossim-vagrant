@@ -63,4 +63,5 @@ omar-app-service:
     - reload: false
     - watch:
       - file: omar-app-service-wrapper
+      - file: omar-app-config
 
