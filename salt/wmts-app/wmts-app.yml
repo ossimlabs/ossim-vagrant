@@ -14,4 +14,8 @@ omar:
     wfsUrl: {{ salt['pillar.get']('ossim:wmts-app:wfsUrl')}}
     wmsUrl: {{ salt['pillar.get']('ossim:wmts-app:wmsUrl')}}
     legacyWmsFlag: {{ salt['pillar.get']('ossim:wmts-app:legacyWmsFlag')}}
-
+---
+grails:
+  serverURL: {{ salt['pillar.get']('ossim:wmts-app:serverURL')}}
+  assets:
+    url: {{ salt['pillar.get']('ossim:wmts-app:assetsURL')}}

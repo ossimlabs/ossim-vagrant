@@ -11,3 +11,9 @@ environments:
 
 quartz:
     jdbcStore: false
+
+---
+grails:
+  serverURL: {{ salt['pillar.get']('ossim:stager-app:serverURL')}}
+  assets:
+    url: {{ salt['pillar.get']('ossim:stager-app:assetsURL')}}

@@ -11,11 +11,22 @@ base:
     - ossim-core
     - omar-user
     - wms-app
+  'wfs-app.local':
+    - java
+    - ossim-core
+    - omar-user
+    - wfs-app
   'stager-app.local':
     - java
     - ossim-core
     - omar-user
     - stager-app
+  'omar-app.local':
+    - java
+    - omar-user
+    - ossim-core
+    - omar-user
+    - omar-app
   'workflow.local':
     - postgres
     - java7
@@ -25,10 +36,4 @@ base:
   'ossim-geocell.local':
     - ossim-core
     - ossim-geocell
-  'omar-app.local':
-    - java
-    - postgres-client
-    - omar-user
-    - ossim-core
-    - omar-app
 

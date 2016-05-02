@@ -1,3 +1,6 @@
+include:
+  - o2
+
 install-stager-app:
   pkg.installed:
     - pkgs:
@@ -21,19 +24,11 @@ stager-app-shell:
     - user: {{ salt['pillar.get']('ossim:user')}}
     - group: {{ salt['pillar.get']('ossim:group')}}
     - mode: 755
+    - defaults:
+      java_opts: "-server -Xms256m -Xmx1024m -Djava.awt.headless=true -XX:+CMSClassUnloadingEnabled -XX:+UseGCOverheadLimit"
+      program_name: stager-app
     - require:
       - pkg: install-stager-app
-
-stager-app-shell-replace-block:
-  file.blockreplace:
-    - name: /usr/share/omar/stager-app/stager-app.sh
-    - marker_start: "#MARKER_START salt managed do not remove"
-    - marker_end: "#MARKER_END salt managed do not remove"
-    - content: |
-        APP_NAME=stager-app
-        JAVA_OPTS="-server -Xms256m -Xmx1024m -Djava.awt.headless=true -XX:+CMSClassUnloadingEnabled -XX:+UseGCOverheadLimit"
-    - require:
-      - file: stager-app-shell
 
 stager-app-dir-perms:
   file.directory:
@@ -47,51 +42,19 @@ stager-app-dir-perms:
     - require:
       - pkg: install-stager-app
 
-
-stager-app-iptables:
-  iptables.insert:
-    - position: 1
-    - table: filter
-    - chain: INPUT
-    - jump: ACCEPT
-    - match: state
-    - connstate: NEW
-    - dport: 8080
-    - proto: tcp
-    - save: True
-
-stager-app-iptables-running:
-  service.running:
-    - name: iptables
-    - enable: true
-    - reload: false
-    - watch:
-      - iptables: stager-app-iptables
-
 stager-app-service-wrapper:
   file.managed:
     - name: /etc/init.d/stager-app
-    - mode: 755    
+    - mode: 755
+    - template: jinja    
     - source: salt://o2/service-wrapper
-    - require:
-      - service: stager-app-iptables-running 
-
-# Setup service wrappers
-# replace the contents between the marker 
-# with the user and program name
-#
-stager-app-service-wrapper-replace-block:
-  file.blockreplace:
-    - name: /etc/init.d/stager-app
-    - marker_start: "#MARKER_START salt managed do not remove"
-    - marker_end: "#MARKER_END salt managed do not remove"
-    - content: |
-        PROG=stager-app
-        PROG_USER="{{ salt['pillar.get']('ossim:user')}}"
-        PROG_GROUP="{{ salt['pillar.get']('ossim:group')}}"
+    - defaults:
+      program_name: stager-app
+      program_user: "{{ salt['pillar.get']('ossim:user')}}"
+      program_group: "{{ salt['pillar.get']('ossim:group')}}"
     - require:
       - pkg: install-stager-app
-      - file: stager-app-service-wrapper
+      - service: o2-app-iptables-running 
 
 stager-app-service:
   service.running:
@@ -99,5 +62,5 @@ stager-app-service:
     - enable: true
     - reload: false
     - watch:
-      - file: stager-app-service-wrapper-replace-block
+      - file: stager-app-service-wrapper
 

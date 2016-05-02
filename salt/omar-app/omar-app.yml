@@ -1,66 +1,39 @@
-grails:
-  serverURL: {{ pillar['ossim']['omar-app']['url'] }}
+environments:
+  production:
+    dataSource:
+      pooled: true
+      jmxExport: true
+      driverClassName: org.postgresql.Driver
+      username: {{ salt['pillar.get']('ossim:database:username')}}
+      password: {{ salt['pillar.get']('ossim:database:password')}}
+      dialect: 'org.hibernate.spatial.dialect.postgis.PostgisDialect'
+      url: {{ salt['pillar.get']('ossim:database:connection')}}
 
-wfs:
-  featureTypeNamespaces:
-      - prefix: omar
-        uri: http://omar.ossim.org
 
-  datastores:
-      - namespaceId: omar
-        datastoreId: {{ pillar['ossim']['database']['name'] }}
-        datastoreParams:
-          dbtype: postgis
-          host: {{ pillar['ossim']['database']['host'] }}
-          port: '5432'
-          database: {{ pillar['ossim']['database']['name'] }}
-          user: postgres
-          passwd: postgres
-          'Expose primary keys': 'true'
-          namespace: http://omar.ossim.org
-
-  featureTypes:
-      - name: raster_entry
-        title: raster_entry
-        description: ''
-        keywords:
-          - omar
-          - raster_entry
-          - features
-        datastoreId: {{ pillar['ossim']['database']['name'] }}
-
-      - name: video_data_set
-        title: video_data_set
-        description: ''
-        keywords:
-          - omar
-          - video_data_set
-          - features
-        datastoreId: {{ pillar['ossim']['database']['name'] }}
 
 omar:
   app:
     root:
-      baseUrl: http://192.168.2.103/
+      baseUrl: http://192.168.2.120:8080/
     wfs:
-      baseUrl: /wfs?
+      baseUrl: http://192.168.2.104:8080/wfs?
       enabled: true
       proxy: /proxy/index?url=
     wms:
-      baseUrl: /wms?
+      baseUrl: http://192.168.2.103:8080/wms?
       enabled: true
     imageSpace:
-      baseUrl: /imageSpace/
+      baseUrl: http://192.168.2.102:8080/imageSpace
       enabled: true
     thumbnails:
-      baseUrl: /imageSpace/getThumbnail?
+      baseUrl: http://192.168.2.102:8080/imageSpace/getThumbnail?
     footprints:
-      baseUrl: /footprints/getFootprints
+      baseUrl: http://192.168.2.104:8080/footprints/getFootprints
     kmlApp:
       baseUrl: http://o2.ossim.org/superoverlay-app
     predio:
       baseUrl: /predio/
-      enabled: true
+      enabled: false
     twofishes:
       baseUrl: http://localhost:9096/twofish
       proxy: /twoFishesProxy
@@ -80,9 +53,8 @@ omar:
         -
           - "acquisition_date"
           - "DESC"
-
-environments:
-  production:
-    dataSource:
-      dbCreate: update
-      url: {{ pillar['ossim']['database']['connection'] }}
+---
+grails:
+  serverURL: {{ salt['pillar.get']('ossim:omar-app:serverURL')}}
+  assets:
+    url: {{ salt['pillar.get']('ossim:omar-app:assetsURL')}}

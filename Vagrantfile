@@ -16,8 +16,8 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder "salt", "/srv/salt", type: "nfs"
   config.vm.synced_folder "pillar", "/srv/pillar", type: "nfs"
   config.vm.synced_folder "formulas", "/srv/formulas", type: "nfs"
-  config.vm.synced_folder "/data", "/data", type: "nfs"
-  #config.vm.synced_folder "/Volumes/DataDrive/data", "/data", type: "nfs"
+  #config.vm.synced_folder "/data", "/data", type: "nfs"
+  config.vm.synced_folder "/Volumes/DataDrive/data", "/data", type: "nfs"
   config.vm.provider "virtualbox" do |vb|
      vb.memory = "2048"
   end
@@ -33,7 +33,8 @@ Vagrant.configure(2) do |config|
       salt.minion_id = "postgres.local"
       salt.masterless = true
       salt.run_highstate = true
-#      salt.log_level = "all"
+#     salt.log_level = "all"
+#     salt.verbose = true
     end
   end
 
@@ -53,20 +54,6 @@ Vagrant.configure(2) do |config|
     end
   end
 
-  # config.vm.define "wmsApp" do |wmsApp|
-  #   config.vm.provider "virtualbox" do |vb|
-  #     vb.memory = "2048"
-  #   end
-  #   wmsApp.vm.network "private_network", ip: "192.168.2.101"
-  #   wmsApp.vm.hostname = "wms-app.local"
-  #   wmsApp.ssh.forward_x11 = false
-  #   wmsApp.vm.provision :salt do |salt|
-  #     salt.minion_id = "wms-app.local"
-  #     salt.masterless = true
-  #     salt.run_highstate = true
-  #   end
-  # end
-
   config.vm.define "stagerApp" do |stagerApp|
     config.vm.provider "virtualbox" do |vb|
        vb.memory = "2048"
@@ -78,25 +65,58 @@ Vagrant.configure(2) do |config|
       salt.minion_id = "stager-app.local"
       salt.masterless = true
       salt.run_highstate = true
+#     salt.log_level = "all"
+#     salt.verbose = true
     end
   end
 
+  config.vm.define "wmsApp" do |wmsApp|
+    config.vm.provider "virtualbox" do |vb|
+      vb.memory = "2048"
+    end
+    wmsApp.vm.network "private_network", ip: "192.168.2.103"
+    wmsApp.vm.hostname = "wms-app.local"
+    wmsApp.ssh.forward_x11 = false
+    wmsApp.vm.provision :salt do |salt|
+      salt.minion_id = "wms-app.local"
+      salt.masterless = true
+      salt.run_highstate = true
+#     salt.log_level = "all"
+#     salt.verbose = true
+    end
+  end
 
-#  config.vm.define "omarApp" do |omarApp|
-#    omarApp.vm.network "private_network", ip: "192.168.2.109"
-#    omarApp.vm.hostname = "omar-app.local"
-#    omarApp.ssh.forward_x11 = false
-#    omarApp.vm.provision :salt do |salt|
-#      salt.minion_id = "omar-app.local"
-#      salt.masterless = true
-#      salt.run_highstate = true
-#      salt.log_level = "all"
-#      salt.verbose = true
-#    end
-#  end
+  config.vm.define "wfsApp" do |wfsApp|
+    config.vm.provider "virtualbox" do |vb|
+      vb.memory = "2048"
+    end
+    wfsApp.vm.network "private_network", ip: "192.168.2.104"
+    wfsApp.vm.hostname = "wfs-app.local"
+    wfsApp.ssh.forward_x11 = false
+    wfsApp.vm.provision :salt do |salt|
+      salt.minion_id = "wfs-app.local"
+      salt.masterless = true
+      salt.run_highstate = true
+#     salt.log_level = "all"
+#     salt.verbose = true
+    end
+  end
+
+ config.vm.define "omarApp" do |omarApp|
+   omarApp.vm.network "private_network", ip: "192.168.2.120"
+   omarApp.vm.hostname = "omar-app.local"
+   omarApp.ssh.forward_x11 = false
+   omarApp.vm.provision :salt do |salt|
+     salt.minion_id = "omar-app.local"
+     salt.masterless = true
+     salt.run_highstate = true
+#     salt.log_level = "all"
+#     salt.verbose = true
+   end
+ end
 
 #  config.vm.define "workflow" do |workflow|
-#    workflow.vm.network "private_network", ip: "192.168.2.110"
+#    workflow.vm.network "private_network", ip: "192.168.2.130"
 #    workflow.vm.hostname = "workflow.local"
 #    workflow.ssh.forward_x11 = true
 #    workflow.vm.provision :salt do |salt|

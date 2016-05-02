@@ -1,17 +1,18 @@
+include:
+  - o2
+
 install-wms-app:
   pkg.installed:
     - pkgs:
       - o2-wms-app
 
-wms-app-dir-perms:
-  file.directory:
-    - name: /usr/share/omar/wms-app 
-    - user: omar
-    - group: omar
-    - mode: 755    
-    - recurse:
-      - user
-      - group
+wms-app-config:
+  file.managed:
+    - name: /usr/share/omar/wms-app/wms-app.yml 
+    - source: salt://wms-app/wms-app.yml
+    - template: jinja
+    - user: {{ salt['pillar.get']('ossim:user')}}
+    - group: {{ salt['pillar.get']('ossim:group')}}
     - require:
       - pkg: install-wms-app
 
@@ -20,44 +21,46 @@ wms-app-shell:
     - name: /usr/share/omar/wms-app/wms-app.sh
     - source: salt://o2/o2-app.sh
     - template: jinja
-    - user: omar
-    - group: omar
+    - user: {{ salt['pillar.get']('ossim:user')}}
+    - group: {{ salt['pillar.get']('ossim:group')}}
     - mode: 755
+    - defaults:
+      java_opts: "-server -Xms256m -Xmx1024m -Djava.awt.headless=true -XX:+CMSClassUnloadingEnabled -XX:+UseGCOverheadLimit"
+      program_name: wms-app
     - require:
       - pkg: install-wms-app
 
-wms-app-shell-replace-block:
-  file.blockreplace:
-    - name: /usr/share/omar/wms-app/wms-app.sh
-    - marker_start: "#MARKER_START salt managed do not remove"
-    - marker_end: "#MARKER_END salt managed do not remove"
-    - content: |
-        APP_NAME=wms-app
-        JAVA_OPTS="-server -Xms256m -Xmx2048m -Djava.awt.headless=true -XX:+CMSClassUnloadingEnabled -XX:+UseGCOverheadLimit"
+wms-app-dir-perms:
+  file.directory:
+    - name: /usr/share/omar/wms-app 
+    - user: {{ salt['pillar.get']('ossim:user')}}
+    - group: {{ salt['pillar.get']('ossim:group')}}
+    - mode: 755    
+    - recurse:
+      - user
+      - group
     - require:
-      - file: wms-app-shell
-
-
+      - pkg: install-wms-app
 
 wms-app-service-wrapper:
   file.managed:
     - name: /etc/init.d/wms-app
-    - mode: 755    
+    - mode: 755
+    - template: jinja    
     - source: salt://o2/service-wrapper
-
-# Setup service wrappers
-# replace the contents between the marker 
-# with the user and program name
-#
-wms-app-service-wrapper-replace-block:
-  file.blockreplace:
-    - name: /etc/init.d/wms-app
-    - marker_start: "#MARKER_START salt managed do not remove"
-    - marker_end: "#MARKER_END salt managed do not remove"
-    - content: |
-        PROG=wms-app
-        PROG_USER="{{ salt['pillar.get']('ossim:user')}}"
-        PROG_GROUP="{{ salt['pillar.get']('ossim:group')}}"
+    - defaults:
+      program_name: wms-app
+      program_user: "{{ salt['pillar.get']('ossim:user')}}"
+      program_group: "{{ salt['pillar.get']('ossim:group')}}"
     - require:
       - pkg: install-wms-app
+      - service: o2-app-iptables-running 
+
+wms-app-service:
+  service.running:
+    - name: wms-app
+    - enable: true
+    - reload: false
+    - watch:
       - file: wms-app-service-wrapper
+

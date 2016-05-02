@@ -13,11 +13,9 @@
 # Short-Description: start, stop and restart ingestListener
 ### END INIT INFO
 RETVAL=$?
-#MARKER_START salt managed do not remove
-PROG=
-PROG_USER=
-PROG_GROUP=
-#MARKER_END salt managed do not remove
+PROG={{ program_name }}
+PROG_USER={{ program_user }}
+PROG_GROUP={{ program_group }}
 PID_DIR="/var/run/${PROG}"
 PROG_PID_DIR="${PID_DIR}"
 PROG_PID="$PID_DIR/${PROG}.pid"
