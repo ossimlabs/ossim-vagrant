@@ -61,6 +61,7 @@ superoverlay-app-service:
     - name: superoverlay-app
     - enable: true
     - reload: false
+    - init_delay: 60
     - watch:
       - file: superoverlay-app-service-wrapper
       - file: superoverlay-app-config

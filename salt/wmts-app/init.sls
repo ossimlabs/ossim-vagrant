@@ -61,6 +61,7 @@ wmts-app-service:
     - name: wmts-app
     - enable: true
     - reload: false
+    - init_delay: 60
     - watch:
       - file: wmts-app-service-wrapper
       - file: wmts-app-config

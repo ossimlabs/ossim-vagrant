@@ -61,6 +61,7 @@ wms-app-service:
     - name: wms-app
     - enable: true
     - reload: false
+    - init_delay: 60
     - watch:
       - file: wms-app-service-wrapper
       - file: wms-app-config

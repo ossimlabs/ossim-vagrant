@@ -36,6 +36,8 @@ omar:
       baseUrl: http://localhost:9096/twofish
       proxy: /twoFishesProxy
     swipeApp:
+      baseUrl: {{ salt['pillar.get']('ossim:swipe-app:serverURL')}}/swipe
+      enabled: true
 #    basemaps:
 #      osm:
 #        baseUrl: http://geoserver-demo01.dev.ossim.org/geoserver/ged/wms?

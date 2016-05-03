@@ -61,6 +61,7 @@ swipe-app-service:
     - name: swipe-app
     - enable: true
     - reload: false
+    - init_delay: 60
     - watch:
       - file: swipe-app-service-wrapper
       - file: swipe-app-config

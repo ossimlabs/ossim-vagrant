@@ -61,6 +61,7 @@ omar-app-service:
     - name: omar-app
     - enable: true
     - reload: false
+    - init_delay: 60
     - watch:
       - file: omar-app-service-wrapper
       - file: omar-app-config

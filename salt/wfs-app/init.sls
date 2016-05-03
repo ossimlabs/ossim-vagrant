@@ -61,6 +61,7 @@ wfs-app-service:
     - name: wfs-app
     - enable: true
     - reload: false
+    - init_delay: 60
     - watch:
       - file: wfs-app-service-wrapper
       - file: wfs-app-config

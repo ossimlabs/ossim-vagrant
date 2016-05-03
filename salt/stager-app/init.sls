@@ -61,6 +61,7 @@ stager-app-service:
     - name: stager-app
     - enable: true
     - reload: false
+    - init_delay: 60
     - watch:
       - file: stager-app-service-wrapper
 
