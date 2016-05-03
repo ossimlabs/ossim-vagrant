@@ -25,7 +25,7 @@ stager-app-shell:
     - group: {{ salt['pillar.get']('ossim:group')}}
     - mode: 755
     - defaults:
-      java_opts: "-server -Xms256m -Xmx1024m -Djava.awt.headless=true -XX:+CMSClassUnloadingEnabled -XX:+UseGCOverheadLimit"
+      java_opts: "{{ salt['pillar.get']('ossim:stager-app:javaOpts')}}"
       program_name: stager-app
     - require:
       - pkg: install-stager-app

@@ -104,7 +104,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.define "superoverlayApp" do |superoverlayApp|
     config.vm.provider "virtualbox" do |vb|
-      vb.memory = "1024"
+      vb.memory = "768"
     end
     superoverlayApp.vm.network "private_network", ip: "192.168.2.105"
     superoverlayApp.vm.hostname = "superoverlay-app.local"
@@ -118,12 +118,47 @@ Vagrant.configure(2) do |config|
     end
   end
 
+  config.vm.define "swipeApp" do |superoverlayApp|
+    config.vm.provider "virtualbox" do |vb|
+      vb.memory = "768"
+    end
+    superoverlayApp.vm.network "private_network", ip: "192.168.2.106"
+    superoverlayApp.vm.hostname = "swipe-app.local"
+    superoverlayApp.ssh.forward_x11 = false
+    superoverlayApp.vm.provision :salt do |salt|
+      salt.minion_id = "swipe-app.local"
+      salt.masterless = true
+      salt.run_highstate = true
+#     salt.log_level = "all"
+#     salt.verbose = true
+    end
+  end
+
  config.vm.define "omarApp" do |omarApp|
+    config.vm.provider "virtualbox" do |vb|
+      vb.memory = "1024"
+    end
    omarApp.vm.network "private_network", ip: "192.168.2.120"
    omarApp.vm.hostname = "omar-app.local"
    omarApp.ssh.forward_x11 = false
    omarApp.vm.provision :salt do |salt|
      salt.minion_id = "omar-app.local"
+     salt.masterless = true
+     salt.run_highstate = true
+#     salt.log_level = "all"
+#     salt.verbose = true
+   end
+ end
+
+ config.vm.define "httpd" do |httpd|
+    config.vm.provider "virtualbox" do |vb|
+      vb.memory = "256"
+    end
+   httpd.vm.network "private_network", ip: "192.168.2.200"
+   httpd.vm.hostname = "httpd.local"
+   httpd.ssh.forward_x11 = false
+   httpd.vm.provision :salt do |salt|
+     salt.minion_id = "httpd.local"
      salt.masterless = true
      salt.run_highstate = true
 #     salt.log_level = "all"

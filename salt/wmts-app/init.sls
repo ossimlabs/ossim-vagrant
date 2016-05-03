@@ -25,7 +25,7 @@ wmts-app-shell:
     - group: {{ salt['pillar.get']('ossim:group')}}
     - mode: 755
     - defaults:
-      java_opts: "-server -Xms256m -Xmx1024m -Djava.awt.headless=true -XX:+CMSClassUnloadingEnabled -XX:+UseGCOverheadLimit"
+      java_opts: "{{ salt['pillar.get']('ossim:wmts-app:javaOpts')}}"
       program_name: wmts-app
     - require:
       - pkg: install-wmts-app

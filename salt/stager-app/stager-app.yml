@@ -17,6 +17,3 @@ grails:
   serverURL: {{ salt['pillar.get']('ossim:stager-app:serverURL')}}
   assets:
     url: {{ salt['pillar.get']('ossim:stager-app:assetsURL')}}
-server:
-  port: 8080
-  contextPath: ""

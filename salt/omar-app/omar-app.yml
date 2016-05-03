@@ -12,23 +12,23 @@ environments:
 omar:
   app:
     root:
-      baseUrl: http://192.168.2.120:8080/
+      baseUrl: {{ salt['pillar.get']('ossim:omar-app:serverURL')}}
     wfs:
-      baseUrl: http://192.168.2.104:8080/wfs?
+      baseUrl: {{ salt['pillar.get']('ossim:wfs-app:serverURL')}}/wfs?
       enabled: true
       proxy: /proxy/index?url=
     wms:
-      baseUrl: http://192.168.2.103:8080/wms?
+      baseUrl: {{ salt['pillar.get']('ossim:wms-app:serverURL')}}/wms?
       enabled: true
     imageSpace:
-      baseUrl: http://192.168.2.102:8080/imageSpace
+      baseUrl: {{ salt['pillar.get']('ossim:wms-app:serverURL')}}/imageSpace
       enabled: true
     thumbnails:
-      baseUrl: http://192.168.2.102:8080/imageSpace/getThumbnail?
+      baseUrl: {{ salt['pillar.get']('ossim:wms-app:serverURL')}}/imageSpace/getThumbnail?
     footprints:
-      baseUrl: http://192.168.2.104:8080/footprints/getFootprints
+      baseUrl: {{ salt['pillar.get']('ossim:wms-app:serverURL')}}/footprints/getFootprints
     kmlApp:
-      baseUrl: http://192.168.2.105:8080
+      baseUrl: {{ salt['pillar.get']('ossim:superoverlay-app:serverURL')}}
     predio:
       baseUrl: /predio/
       enabled: false

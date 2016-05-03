@@ -26,12 +26,19 @@ base:
     - ossim-core
     - omar-user
     - stager-app
+  'swipe-app.local':
+    - java
+    - ossim-core.yum-repo
+    - omar-user
+    - swipe-app
   'omar-app.local':
     - java
     - omar-user
     - ossim-core
     - omar-user
     - omar-app
+  'httpd.local':
+    - httpd
   'workflow.local':
     - postgres
     - java7
