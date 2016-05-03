@@ -19,12 +19,13 @@ Vagrant.configure(2) do |config|
   #config.vm.synced_folder "/data", "/data", type: "nfs"
   config.vm.synced_folder "/Volumes/DataDrive/data", "/data", type: "nfs"
   config.vm.provider "virtualbox" do |vb|
-     vb.memory = "2048"
+     vb.customize ["modifyvm", :id, "--memory", "1024"]
+#     vb.customize ["modifyvm", :id, "--name", "MYBOX"]
   end
 
   config.vm.define "postgres" do |postgres|
-    config.vm.provider "virtualbox" do |vb|
-      vb.memory = "1024"
+    postgres.vm.provider "virtualbox" do |vb|
+       vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
     postgres.vm.network "private_network", ip: "192.168.2.100"
     postgres.vm.hostname = "postgres.local"
@@ -38,9 +39,25 @@ Vagrant.configure(2) do |config|
     end
   end
 
+  config.vm.define "httpd" do |httpd|
+    httpd.vm.provider "virtualbox" do |vb|
+       vb.customize ["modifyvm", :id, "--memory", "1024"]
+    end
+    httpd.vm.network "private_network", ip: "192.168.2.200"
+    httpd.vm.hostname = "httpd.local"
+    httpd.ssh.forward_x11 = false
+    httpd.vm.provision :salt do |salt|
+      salt.minion_id = "httpd.local"
+      salt.masterless = true
+      salt.run_highstate = true
+#     salt.log_level = "all"
+#     salt.verbose = true
+    end
+  end
+
   config.vm.define "wmtsApp" do |wmtsApp|
-    config.vm.provider "virtualbox" do |vb|
-      vb.memory = "1024"
+    wmtsApp.vm.provider "virtualbox" do |vb|
+       vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
     wmtsApp.vm.network "private_network", ip: "192.168.2.101"
     wmtsApp.vm.hostname = "wmts-app.local"
@@ -55,8 +72,8 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define "stagerApp" do |stagerApp|
-    config.vm.provider "virtualbox" do |vb|
-       vb.memory = "1024"
+    stagerApp.vm.provider "virtualbox" do |vb|
+       vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
     stagerApp.vm.network "private_network", ip: "192.168.2.102"
     stagerApp.vm.hostname = "stager-app.local"
@@ -71,8 +88,8 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define "wmsApp" do |wmsApp|
-    config.vm.provider "virtualbox" do |vb|
-      vb.memory = "1024"
+    wmsApp.vm.provider "virtualbox" do |vb|
+       vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
     wmsApp.vm.network "private_network", ip: "192.168.2.103"
     wmsApp.vm.hostname = "wms-app.local"
@@ -87,8 +104,8 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define "wfsApp" do |wfsApp|
-    config.vm.provider "virtualbox" do |vb|
-      vb.memory = "1024"
+    wfsApp.vm.provider "virtualbox" do |vb|
+       vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
     wfsApp.vm.network "private_network", ip: "192.168.2.104"
     wfsApp.vm.hostname = "wfs-app.local"
@@ -97,14 +114,14 @@ Vagrant.configure(2) do |config|
       salt.minion_id = "wfs-app.local"
       salt.masterless = true
       salt.run_highstate = true
-#     salt.log_level = "all"
-#     salt.verbose = true
+#      salt.log_level = "info"
+#      salt.verbose = true
     end
   end
 
   config.vm.define "superoverlayApp" do |superoverlayApp|
-    config.vm.provider "virtualbox" do |vb|
-      vb.memory = "768"
+    superoverlayApp.vm.provider "virtualbox" do |vb|
+       vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
     superoverlayApp.vm.network "private_network", ip: "192.168.2.105"
     superoverlayApp.vm.hostname = "superoverlay-app.local"
@@ -118,14 +135,14 @@ Vagrant.configure(2) do |config|
     end
   end
 
-  config.vm.define "swipeApp" do |superoverlayApp|
-    config.vm.provider "virtualbox" do |vb|
-      vb.memory = "768"
+  config.vm.define "swipeApp" do |swipeApp|
+    swipeApp.vm.provider "virtualbox" do |vb|
+       vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
-    superoverlayApp.vm.network "private_network", ip: "192.168.2.106"
-    superoverlayApp.vm.hostname = "swipe-app.local"
-    superoverlayApp.ssh.forward_x11 = false
-    superoverlayApp.vm.provision :salt do |salt|
+    swipeApp.vm.network "private_network", ip: "192.168.2.106"
+    swipeApp.vm.hostname = "swipe-app.local"
+    swipeApp.ssh.forward_x11 = false
+    swipeApp.vm.provision :salt do |salt|
       salt.minion_id = "swipe-app.local"
       salt.masterless = true
       salt.run_highstate = true
@@ -135,30 +152,14 @@ Vagrant.configure(2) do |config|
   end
 
  config.vm.define "omarApp" do |omarApp|
-    config.vm.provider "virtualbox" do |vb|
-      vb.memory = "1024"
+    omarApp.vm.provider "virtualbox" do |vb|
+       vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
    omarApp.vm.network "private_network", ip: "192.168.2.120"
    omarApp.vm.hostname = "omar-app.local"
    omarApp.ssh.forward_x11 = false
    omarApp.vm.provision :salt do |salt|
      salt.minion_id = "omar-app.local"
-     salt.masterless = true
-     salt.run_highstate = true
-#     salt.log_level = "all"
-#     salt.verbose = true
-   end
- end
-
- config.vm.define "httpd" do |httpd|
-    config.vm.provider "virtualbox" do |vb|
-      vb.memory = "256"
-    end
-   httpd.vm.network "private_network", ip: "192.168.2.200"
-   httpd.vm.hostname = "httpd.local"
-   httpd.ssh.forward_x11 = false
-   httpd.vm.provision :salt do |salt|
-     salt.minion_id = "httpd.local"
      salt.masterless = true
      salt.run_highstate = true
 #     salt.log_level = "all"
