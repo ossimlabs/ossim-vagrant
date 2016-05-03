@@ -27,7 +27,10 @@ Now issue a *vagrant up*.
 
 The **vagrant up** command will bring up the following VMs **httpd**, **postgres**, **WMTS**, **Stager**, **WMS**, **WFS**, **SuperOverlay**, **Swipe**, **OMAR Web UI** for a total of 9 VMs.
 
-To bring up the main UI ex
+To bring up the main UI can browse to the following link: http://192.168.2.200/omar-app/omar
+
+
+Other useful links:
 
 * http://192.168.2.200/wms-app/
 * http://192.168.2.200/wfs-app/
