@@ -1,4 +1,3 @@
-
 policycoreutils-python:
   pkg.installed
 
