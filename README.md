@@ -9,7 +9,7 @@
 
 #Introduction
 
-ossim-vagrant module under ossimlabs allows one to install and configure an entire local cluster for trying and testing the binary distribution of OSSIM and the new OMAR version 2 or O2 distribution.
+ossim-vagrant module under ossimlabs allows one to install and configure an entire local cluster for trying and testing the binary distribution of OSSIM and the new OMAR version 2 also known as the O2 distribution.
 
 ```git
 git clone https://github.com/ossimlabs/ossim-vagrant.git
@@ -20,22 +20,24 @@ Now edit the vagrant file and make sure that you set a NFS share directory where
 
   config.vm.synced_folder "/Volumes/DataDrive/data", "/data", type: "nfs"
 
-to a local directory that exists with data.
+to a local directory that exists with data.  That directory will be mounted on all VMs as /data
 
 Now issue a *vagrant up*.
 
 
 The **vagrant up** command will bring up the following VMs **httpd**, **postgres**, **WMTS**, **Stager**, **WMS**, **WFS**, **SuperOverlay**, **Swipe**, **OMAR Web UI** for a total of 9 VMs.
 
-To bring up the main UI can browse to the following link: http://192.168.2.200/omar-app/omar
+Once the VMs are up and running you can browse to the main Web UI by following  [http://192.168.2.200/omar-app/omar](http://192.168.2.200/omar-app/omar)
 
 
-Other useful links:
+All services are running on their own VM and are reachable directly.  The direct IPs are listed in the vagrant file and are not listed here.  The httpd VM is a proxy to the web services and are reached by the following base URL.
 
 * http://192.168.2.200/wms-app/
 * http://192.168.2.200/wfs-app/
 * http://192.168.2.200/stager-app/
 * http://192.168.2.200/superoverlay-app/
+
+Some of the URLs have *Swagger* API documentation and can be reached by adding the api path to the URL.  Example: [http://192.168.2.200/stager-app/api](http://192.168.2.200/stager-app/api)
 
 # Notes
 
