@@ -45,10 +45,10 @@ This section is reserved for notes that are usuful for the vagrant environment.
 
 ##NFS Share and password prompting
 
-If you do not want to be prompted for a password when doing NFS share mount modifications in Vagrant you can add the following to your sudoers:
+If you do not want to be prompted for a password when doing NFS share mount modifications in Vagrant you can add a NOPASSWD definition to the sudoers file.  On the MAC we use the admin group and add a definition to the /etc/sudoers:
 
 ```bash
 %admin  ALL=(ALL) NOPASSWD: ALL
 ```
 
-Other groups can be used for other flavors of linux.  For some you can use the %wheel group
+Other groups can be used for other flavors of linux.  For others the common super group might be called %wheel instead of %admin.
