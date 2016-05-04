@@ -6,6 +6,9 @@
 * Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) for your OS 
 * Network Connection
 * git client
+* CPU/BIOS supporting 64 bit virtualization
+
+
 
 #Introduction
 
@@ -67,5 +70,6 @@ If you do not want to be prompted for a password when doing NFS share mount modi
 ```bash
 %admin  ALL=(ALL) NOPASSWD: ALL
 ```
+*On the MAC there might be an entry already present in sudoers for the admin group and you just need to add the "NOPASSWD:" to the entry*
 
 Other groups can be used for other flavors of linux.  For others the common super group might be called %wheel instead of %admin.
