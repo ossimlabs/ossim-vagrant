@@ -30,20 +30,32 @@ The **vagrant up** command will bring up the following VMs **httpd**, **postgres
 Once the VMs are up and running you can browse to the main Web UI by following  [http://192.168.2.200/omar-app/omar](http://192.168.2.200/omar-app/omar)
 
 
-All services are running on their own VM and are reachable directly.  The direct IPs are listed in the vagrant file and are not listed here.  The httpd VM is a proxy to the web services and are reached by the following base URL.
-
-* http://192.168.2.200/wms-app/
-* http://192.168.2.200/wfs-app/
-* http://192.168.2.200/stager-app/
-* http://192.168.2.200/superoverlay-app/
-
-Some of the URLs have *Swagger* API documentation and can be reached by adding the api path to the URL.  Example: [http://192.168.2.200/stager-app/api](http://192.168.2.200/stager-app/api)
-
-You can also verify the health of any service by adding the *health* path to the URL.  For example, if you want to see what the health of the stager service is you can visit the link [http://192.168.2.200/stager-app/health](http://192.168.2.200/stager-app/health).  It will return a simple JSON text that has the status variable set to UP and should look something like:
+All services are running on their own VM and are reachable directly.  The direct IPs are listed in the vagrant file and are not listed here.  The httpd VM is a proxy to the web services and are reached via the 192.168.2.200 proxy.  Here we show how to display the health of a VM.  If the VM is up and running you should see 
 
 ```JSON
 {"status":"UP"}
 ```
+
+
+* [http://192.168.2.200/wmts-app/health](http://192.168.2.200/wmts-app/health)
+* [http://192.168.2.200/wms-app/health](http://192.168.2.200/wms-app/health)
+* [http://192.168.2.200/wfs-app/health](http://192.168.2.200/wfs-app/health)
+* [http://192.168.2.200/omar-app/health](http://192.168.2.200/omar-app/health)
+* [http://192.168.2.200/swipe-app/health](http://192.168.2.200/swipe-app/health)
+* [http://192.168.2.200/stager-app/health](http://192.168.2.200/stager-app/health)
+* [http://192.168.2.200/superoverlay-app/health](http://192.168.2.200/superoverlay-app/health)
+
+Some of the URLs have *Swagger* API documentation and can be reached by adding the api path to the URL:
+
+* [http://192.168.2.200/wmts-app/api](http://192.168.2.200/wmts-app/api)
+* [http://192.168.2.200/wms-app/api](http://192.168.2.200/wms-app/api)
+* [http://192.168.2.200/wfs-app/api](http://192.168.2.200/wfs-app/api)
+* [http://192.168.2.200/omar-app/api](http://192.168.2.200/omar-app/api)
+* [http://192.168.2.200/swipe-app/api](http://192.168.2.200/swipe-app/api)
+* [http://192.168.2.200/stager-app/api](http://192.168.2.200/stager-app/api)
+* [http://192.168.2.200/superoverlay-app/api](http://192.168.2.200/superoverlay-app/api)
+
+
 # Notes
 
 This section is reserved for notes that are usuful for the vagrant environment.
