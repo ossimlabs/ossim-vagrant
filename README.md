@@ -39,6 +39,11 @@ All services are running on their own VM and are reachable directly.  The direct
 
 Some of the URLs have *Swagger* API documentation and can be reached by adding the api path to the URL.  Example: [http://192.168.2.200/stager-app/api](http://192.168.2.200/stager-app/api)
 
+You can also verify the health of any service by adding the *health* path to the URL.  For example, if you want to see what the health of the stager service is you can visit the link [http://192.168.2.200/stager-app/health](http://192.168.2.200/stager-app/health).  It will return a simple JSON text that has the status variable set to UP and should look something like:
+
+```JSON
+{"status":"UP"}
+```
 # Notes
 
 This section is reserved for notes that are usuful for the vagrant environment.
