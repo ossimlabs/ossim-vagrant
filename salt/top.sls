@@ -26,5 +26,10 @@ base:
   'omar-app.local':
     - ossim-core
     - omar-app
+  'test.local':
+    - java
+    - ossim-core.yum-repo
+    - omar-user
+    - wmts-app
 
 

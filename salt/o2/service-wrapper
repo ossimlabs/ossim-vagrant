@@ -2,7 +2,7 @@
 #
 ### BEGIN INIT INFO
 # chkconfig: 3 80 20
-# Provides: General service wrapper for various O2 services
+# Provides: General service wrapper for {{ program_name }} services
 # Required-Start: $network $syslog
 # Required-Stop: $network $syslog
 # Default-Start: 3

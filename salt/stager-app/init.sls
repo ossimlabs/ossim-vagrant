@@ -15,46 +15,11 @@ stager-app-config:
     - group: {{ salt['pillar.get']('ossim:group')}}
     - require:
       - pkg: install-stager-app
-
-stager-app-shell:
-  file.managed:
-    - name: /usr/share/omar/stager-app/stager-app.sh
-    - source: salt://o2/o2-app.sh
-    - template: jinja
-    - user: {{ salt['pillar.get']('ossim:user')}}
-    - group: {{ salt['pillar.get']('ossim:group')}}
-    - mode: 755
-    - defaults:
-      java_opts: "{{ salt['pillar.get']('ossim:stager-app:javaOpts')}}"
-      program_name: stager-app
-    - require:
-      - pkg: install-stager-app
-
-stager-app-dir-perms:
-  file.directory:
-    - name: /usr/share/omar/stager-app 
-    - user: {{ salt['pillar.get']('ossim:user')}}
-    - group: {{ salt['pillar.get']('ossim:group')}}
-    - mode: 755    
-    - recurse:
-      - user
-      - group
-    - require:
-      - pkg: install-stager-app
-
-stager-app-service-wrapper:
-  file.managed:
-    - name: /etc/init.d/stager-app
-    - mode: 755
-    - template: jinja    
-    - source: salt://o2/service-wrapper
-    - defaults:
-      program_name: stager-app
-      program_user: "{{ salt['pillar.get']('ossim:user')}}"
-      program_group: "{{ salt['pillar.get']('ossim:group')}}"
-    - require:
-      - pkg: install-stager-app
+{% if not salt['file.directory_exists' ]('/etc/systemd') %}
       - service: o2-app-iptables-running 
+{% else %}
+      - firewalld: o2-app-firewalld
+{% endif %}
 
 stager-app-service:
   service.running:
@@ -63,5 +28,5 @@ stager-app-service:
     - reload: false
     - init_delay: 60
     - watch:
-      - file: stager-app-service-wrapper
+      - file: stager-app-config
 

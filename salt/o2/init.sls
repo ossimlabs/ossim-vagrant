@@ -18,7 +18,7 @@ httpd_can_network_connect:
     - require:
       - selinux: selinux_mode
 
-
+{% if 1 == salt['cmd.retcode']('test -f /etc/sysconfig/firewalld') %}
 o2-app-iptables:
   iptables.insert:
     - position: 1
@@ -38,3 +38,27 @@ o2-app-iptables-running:
     - reload: false
     - watch:
       - iptables: o2-app-iptables
+{% else %}
+
+o2-app-firewalld-running:
+  service.running:
+    - name: firewalld
+    - enable: true
+    - reload: false
+
+o2-app-firewalld:
+  firewalld.present:
+    - name: public
+#    - block_icmp:
+#      - echo-reply
+#      - echo-request
+    - default: False
+#    - masquerade: True
+    - ports:
+      - 8080/tcp
+      - 80/tcp
+    - require:
+      - service: o2-app-firewalld-running
+
+
+{% endif %}

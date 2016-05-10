@@ -17,7 +17,7 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder "pillar", "/srv/pillar", type: "nfs"
   config.vm.synced_folder "formulas", "/srv/formulas", type: "nfs"
   #config.vm.synced_folder "/data", "/data", type: "nfs"
-  config.vm.synced_folder "/Volumes/DataDrive/data", "/data", type: "nfs"
+  #config.vm.synced_folder "/Volumes/DataDrive/data", "/data", type: "nfs"
   config.vm.provider "virtualbox" do |vb|
      vb.customize ["modifyvm", :id, "--memory", "1024"]
 #     vb.customize ["modifyvm", :id, "--name", "MYBOX"]
@@ -56,6 +56,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define "wmtsApp" do |wmtsApp|
+    wmtsApp.vm.box = "centos/7"
     wmtsApp.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
@@ -136,7 +137,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define "swipeApp" do |swipeApp|
-    swipeApp.vm.provider "virtualbox" do |vb|
+   swipeApp.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
     swipeApp.vm.network "private_network", ip: "192.168.2.106"
@@ -166,6 +167,21 @@ Vagrant.configure(2) do |config|
 #     salt.verbose = true
    end
  end
+
+
+
+#  config.vm.define "test" do |test|
+#    test.vm.box = "centos/7"
+#    test.vm.network "private_network", ip: "192.168.2.140"
+#    test.vm.hostname = "test.local"
+#    test.ssh.forward_x11 = true
+#    test.vm.provision :salt do |salt|
+#      salt.minion_id = "test.local"
+#      salt.masterless = true
+#      salt.run_highstate = true
+#      salt.log_level = "all"
+#    end
+#  end
 
 #  config.vm.define "workflow" do |workflow|
 #    workflow.vm.network "private_network", ip: "192.168.2.130"
