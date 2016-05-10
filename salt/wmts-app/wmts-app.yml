@@ -1,6 +1,6 @@
 server:
-   contextPath: 
-   port: 8080
+  contextPath: 
+  port: 8080
 
 environments:
   production:

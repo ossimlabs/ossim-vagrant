@@ -15,11 +15,7 @@ wfs-app-config:
     - group: {{ salt['pillar.get']('ossim:group')}}
     - require:
       - pkg: install-wfs-app
-{% if not salt['file.directory_exists' ]('/etc/systemd') %}
-      - service: o2-app-iptables-running 
-{% else %}
-      - firewalld: o2-app-firewalld
-{% endif %}
+      - service: o2-app-firewall-running 
 
 wfs-app-service:
   service.running:

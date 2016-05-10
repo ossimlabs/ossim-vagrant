@@ -1,3 +1,7 @@
+server:
+  contextPath: 
+  port: 8080
+
 environments:
   production:
     dataSource:
@@ -10,11 +14,11 @@ environments:
       url: {{ salt['pillar.get']('ossim:database:connection')}}
 
 swipe:
-    app:
-        wfs:
-            baseUrl: {{ salt['pillar.get']('ossim:wfs-app:serverURL')}}/wfs?
-        wms:
-            baseUrl: {{ salt['pillar.get']('ossim:wms-app:serverURL')}}/wms?
+  app:
+    wfs:
+      baseUrl: {{ salt['pillar.get']('ossim:wfs-app:serverURL')}}/wfs?
+    wms:
+      baseUrl: {{ salt['pillar.get']('ossim:wms-app:serverURL')}}/wms?
 ---
 grails:
   serverURL: {{ salt['pillar.get']('ossim:swipe-app:serverURL')}}

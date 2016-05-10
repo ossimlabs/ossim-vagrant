@@ -6,7 +6,6 @@ base:
   '*-app.local':
     - java
     - ossim-core.yum-repo
-    - omar-user
   'wmts-app.local':
     - wmts-app
   'wms-app.local':
