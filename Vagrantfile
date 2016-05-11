@@ -2,7 +2,8 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "bhosmer/centos6.6-minimal"
+  config.vm.box = "centos/7"
+#  config.vm.box = "bhosmer/centos6.6-minimal"
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -16,7 +17,7 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder "salt", "/srv/salt", type: "nfs"
   config.vm.synced_folder "pillar", "/srv/pillar", type: "nfs"
   config.vm.synced_folder "formulas", "/srv/formulas", type: "nfs"
-  #config.vm.synced_folder "/data", "/data", type: "nfs"
+  config.vm.synced_folder "/data", "/data", type: "nfs"
   #config.vm.synced_folder "/Volumes/DataDrive/data", "/data", type: "nfs"
   config.vm.provider "virtualbox" do |vb|
      vb.customize ["modifyvm", :id, "--memory", "1024"]
@@ -24,6 +25,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define "postgres" do |postgres|
+    postgres.vm.box = "bento/centos-6.7"
     postgres.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
@@ -40,6 +42,7 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define "httpd" do |httpd|
+    httpd.vm.box = "bento/centos-6.7"
     httpd.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
@@ -56,7 +59,6 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define "wmtsApp" do |wmtsApp|
-    wmtsApp.vm.box = "centos/7"
     wmtsApp.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--memory", "1024"]
     end

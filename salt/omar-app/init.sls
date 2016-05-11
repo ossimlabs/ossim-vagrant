@@ -19,7 +19,11 @@ omar-app-config:
 
 omar-app-service:
   service.running:
+{% if not salt['file.file_exists' ]('/etc/sysconfig/firewalld') %}
     - name: omar-app
+{% else %}
+    - name: omar-app.service
+{% endif %}
     - enable: true
     - reload: false
     - init_delay: 60

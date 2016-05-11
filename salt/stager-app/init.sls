@@ -19,8 +19,13 @@ stager-app-config:
 
 stager-app-service:
   service.running:
+{% if not salt['file.file_exists' ]('/etc/sysconfig/firewalld') %}
     - name: stager-app
+{% else %}
+    - name: stager-app.service
+{% endif %}
     - enable: true
+
     - reload: false
     - init_delay: 60
     - watch:

@@ -19,7 +19,11 @@ superoverlay-app-config:
 
 superoverlay-app-service:
   service.running:
+{% if not salt['file.file_exists' ]('/etc/sysconfig/firewalld') %}
     - name: superoverlay-app
+{% else %}
+    - name: superoverlay-app.service
+{% endif %}
     - enable: true
     - reload: false
     - init_delay: 60

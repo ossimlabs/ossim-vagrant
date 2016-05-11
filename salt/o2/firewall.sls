@@ -14,12 +14,13 @@ o2-app-firewall:
 o2-app-firewall-running:
   service.running:
     - name: iptables
-    - enable: true
-    - reload: false
+    - enable: True
+    - reload: False
     - watch:
       - iptables: o2-app-firewall
 
 {% else %}
+
 o2-app-firewall-up:
   service.running:
     - name: firewalld

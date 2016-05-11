@@ -1,5 +1,5 @@
 include:
-  - firewall
+  - o2.firewall
 
 policycoreutils-python:
   pkg.installed

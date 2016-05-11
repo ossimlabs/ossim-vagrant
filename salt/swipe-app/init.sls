@@ -19,7 +19,11 @@ swipe-app-config:
 
 swipe-app-service:
   service.running:
+{% if not salt['file.file_exists' ]('/etc/sysconfig/firewalld') %}
     - name: swipe-app
+{% else %}
+    - name: swipe-app.service
+{% endif %}
     - enable: true
     - reload: false
     - init_delay: 60

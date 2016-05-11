@@ -19,7 +19,11 @@ wms-app-config:
 
 wms-app-service:
   service.running:
+{% if not salt['file.file_exists' ]('/etc/sysconfig/firewalld') %}
     - name: wms-app
+{% else %}
+    - name: wms-app.service
+{% endif %}
     - enable: true
     - reload: false
     - init_delay: 60
