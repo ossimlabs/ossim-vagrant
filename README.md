@@ -12,7 +12,7 @@
 
 #Introduction
 
-ossim-vagrant module under ossimlabs allows one to install and configure an entire local cluster for trying and testing the binary distribution of OSSIM and the new OMAR version 2 also known as the O2 distribution.
+ossim-vagrant module under ossimlabs allows one to install and configure an entire local cluster for trying and testing the binary distribution of [OSSIM](https://github.com/ossimlabs/ossim) and the new [OMAR](https://github.com/ossimlabs/omar) version 2 also known as the O2 distribution.
 
 ```git
 git clone https://github.com/ossimlabs/ossim-vagrant.git
