@@ -1,32 +1,34 @@
+{% set app_name = "omar-app" %}
 include:
   - o2
 
-install-omar-app:
+install-{{app_name}}:
   pkg.installed:
     - pkgs:
-      - o2-omar-app
+      - o2-{{app_name}}
 
-omar-app-config:
+{{app_name}}-config:
   file.managed:
-    - name: /usr/share/omar/omar-app/omar-app.yml 
-    - source: salt://omar-app/omar-app.yml
+    - name: /usr/share/omar/{{app_name}}/{{app_name}}.yml 
+    - source: salt://{{app_name}}/{{app_name}}.yml
     - template: jinja
     - user: {{ salt['pillar.get']('ossim:user')}}
     - group: {{ salt['pillar.get']('ossim:group')}}
     - require:
-      - pkg: install-omar-app
+      - pkg: install-{{app_name}}
       - service: o2-app-firewall-running 
 
-omar-app-service:
+{{app_name}}-service:
   service.running:
 {% if not salt['file.file_exists' ]('/etc/sysconfig/firewalld') %}
-    - name: omar-app
+    - name: {{app_name}}
 {% else %}
-    - name: omar-app.service
+    - name: {{app_name}}.service
 {% endif %}
     - enable: true
+
     - reload: false
     - init_delay: 60
     - watch:
-      - file: omar-app-config
+      - file: {{app_name}}-config
 

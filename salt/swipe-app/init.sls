@@ -1,31 +1,34 @@
+{% set app_name = "swipe-app" %}
 include:
   - o2
 
-install-swipe-app:
+install-{{app_name}}:
   pkg.installed:
     - pkgs:
-      - o2-swipe-app
+      - o2-{{app_name}}
 
-swipe-app-config:
+{{app_name}}-config:
   file.managed:
-    - name: /usr/share/omar/swipe-app/swipe-app.yml 
-    - source: salt://swipe-app/swipe-app.yml
+    - name: /usr/share/omar/{{app_name}}/{{app_name}}.yml 
+    - source: salt://{{app_name}}/{{app_name}}.yml
     - template: jinja
     - user: {{ salt['pillar.get']('ossim:user')}}
     - group: {{ salt['pillar.get']('ossim:group')}}
     - require:
-      - pkg: install-swipe-app
+      - pkg: install-{{app_name}}
       - service: o2-app-firewall-running 
 
-swipe-app-service:
+{{app_name}}-service:
   service.running:
 {% if not salt['file.file_exists' ]('/etc/sysconfig/firewalld') %}
-    - name: swipe-app
+    - name: {{app_name}}
 {% else %}
-    - name: swipe-app.service
+    - name: {{app_name}}.service
 {% endif %}
     - enable: true
+
     - reload: false
     - init_delay: 60
     - watch:
-      - file: swipe-app-config
+      - file: {{app_name}}-config
+

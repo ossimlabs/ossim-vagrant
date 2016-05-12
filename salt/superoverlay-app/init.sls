@@ -1,32 +1,34 @@
+{% set app_name = "superoverlay-app" %}
 include:
   - o2
 
-install-superoverlay-app:
+install-{{app_name}}:
   pkg.installed:
     - pkgs:
-      - o2-superoverlay-app
+      - o2-{{app_name}}
 
-superoverlay-app-config:
+{{app_name}}-config:
   file.managed:
-    - name: /usr/share/omar/superoverlay-app/superoverlay-app.yml 
-    - source: salt://superoverlay-app/superoverlay-app.yml
+    - name: /usr/share/omar/{{app_name}}/{{app_name}}.yml 
+    - source: salt://{{app_name}}/{{app_name}}.yml
     - template: jinja
     - user: {{ salt['pillar.get']('ossim:user')}}
     - group: {{ salt['pillar.get']('ossim:group')}}
     - require:
-      - pkg: install-superoverlay-app
+      - pkg: install-{{app_name}}
       - service: o2-app-firewall-running 
 
-superoverlay-app-service:
+{{app_name}}-service:
   service.running:
 {% if not salt['file.file_exists' ]('/etc/sysconfig/firewalld') %}
-    - name: superoverlay-app
+    - name: {{app_name}}
 {% else %}
-    - name: superoverlay-app.service
+    - name: {{app_name}}.service
 {% endif %}
     - enable: true
+
     - reload: false
     - init_delay: 60
     - watch:
-      - file: superoverlay-app-config
+      - file: {{app_name}}-config
 
