@@ -26,7 +26,6 @@ install-{{app_name}}:
     - name: {{app_name}}.service
 {% endif %}
     - enable: true
-
     - reload: false
     - init_delay: 60
     - watch:
