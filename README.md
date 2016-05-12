@@ -14,28 +14,48 @@
 
 ossim-vagrant module under ossimlabs allows one to install and configure an entire local cluster for trying and testing the binary distribution of [OSSIM](https://github.com/ossimlabs/ossim) and the new [OMAR](https://github.com/ossimlabs/omar) version 2 also known as the O2 distribution.
 
-```git
+```
 git clone https://github.com/ossimlabs/ossim-vagrant.git
 cd ossim-vagrant
 git checkout dev  # checkout dev if desired to use latest and greatest
 ```
-Now edit the vagrant file and make sure that you set a NFS share directory where your data resides.  Change the line **"/Volumes/DataDrive/data"** found in:
+Now edit the vagrant file and make sure that you set a NFS share directory where your data resides.
 
-  config.vm.synced_folder "/Volumes/DataDrive/data", "/data", type: "nfs"
-
-to a local directory that exists with data.  That directory will be mounted on all VMs as /data
-
-Now issue a *vagrant up*.
+  config.vm.synced_folder \<source directory>, "/data", type: "nfs"
+ 
+where **\<source directory>** is a directory on your computer that you wish to NFS share and will be mounted on all the VM instances to location **/data**.
 
 
-The **vagrant up** command will bring up the following VMs **httpd**, **postgres**, **WMTS**, **Stager**, **WMS**, **WFS**, **SuperOverlay**, **Swipe**, **OMAR Web UI** for a total of 9 VMs.
+Now bring up all the VMs
+
+```
+vagrant up
+```
+
+
+The **vagrant up** command will bring up the following VMs **httpd**, **postgres**, **WMTS**, **Stager**, **WMS**, **WFS**, **SuperOverlay**, **Swipe**, **OMAR Web UI** for a total of 9 VMs.  The vagrant id for each are as follows: **httpd**, **postgres**, **wmtsApp**, **stagerApp**, **wmsApp**, **wfsApp**, **superoverlayApp**, **swipeApp**, **omarApp**.
+
+Each individual vagrant WM instance can be specified if you do not want to bring all the VMs up at once.   For instance,  if you just want to use the wmts interface it uses the WMS, and WFS and we will need the proxy and the postgres database.  To get data into the system add the stagerApp VM.  We can issue the following command to specify individual VM instances.
+
+```
+vagrant up postgres httpd wmsApp wfsApp stagerApp wmtsApp
+```
+
+This will bring up each application individually and connect them together.  If you want to ssh into any of the instances that are up you can do
+
+```
+vagrant ssh stagerApp
+```
+
+which will ssh into the stager WM without having to type the password.
+
 
 Once the VMs are up and running you can browse to the main Web UI by following  [http://192.168.2.200/omar-app/omar](http://192.168.2.200/omar-app/omar)
 
 
 All services are running on their own VM and are reachable directly.  The direct IPs are listed in the vagrant file and are not listed here.  The httpd VM is a proxy to the web services and are reached via the 192.168.2.200 proxy.  Here we show how to display the health of a VM.  If the VM is up and running you should see 
 
-```JSON
+```
 {"status":"UP"}
 ```
 
@@ -67,7 +87,7 @@ This section is reserved for notes that are usuful for the vagrant environment.
 
 If you do not want to be prompted for a password when doing NFS share mount modifications in Vagrant you can add a NOPASSWD definition to the sudoers file.  On the MAC we use the admin group and add a definition to the /etc/sudoers:
 
-```bash
+```
 %admin  ALL=(ALL) NOPASSWD: ALL
 ```
 *On the MAC there might be an entry already present in sudoers for the admin group and you just need to add the "NOPASSWD:" to the entry*
