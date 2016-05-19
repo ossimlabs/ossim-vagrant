@@ -154,6 +154,38 @@ Vagrant.configure(2) do |config|
     end
   end
 
+  config.vm.define "jpipApp" do |jpipApp|
+   jpipApp.vm.provider "virtualbox" do |vb|
+       vb.customize ["modifyvm", :id, "--memory", "1024"]
+    end
+    jpipApp.vm.network "private_network", ip: "192.168.2.107"
+    jpipApp.vm.hostname = "jpip-app.local"
+    jpipApp.ssh.forward_x11 = false
+    jpipApp.vm.provision :salt do |salt|
+      salt.minion_id = "jpip-app.local"
+      salt.masterless = true
+      salt.run_highstate = true
+#     salt.log_level = "all"
+#     salt.verbose = true
+    end
+  end
+
+  config.vm.define "jpipServer" do |jpipServer|
+   jpipServer.vm.provider "virtualbox" do |vb|
+       vb.customize ["modifyvm", :id, "--memory", "1024"]
+    end
+    jpipServer.vm.network "private_network", ip: "192.168.2.108"
+    jpipServer.vm.hostname = "jpip-server.local"
+    jpipServer.ssh.forward_x11 = false
+    jpipServer.vm.provision :salt do |salt|
+      salt.minion_id = "jpip-server.local"
+      salt.masterless = true
+      salt.run_highstate = true
+#     salt.log_level = "all"
+#     salt.verbose = true
+    end
+  end
+
  config.vm.define "omarApp" do |omarApp|
     omarApp.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--memory", "1024"]

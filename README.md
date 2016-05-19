@@ -67,6 +67,7 @@ All services are running on their own VM and are reachable directly.  The direct
 * [http://192.168.2.200/swipe-app/health](http://192.168.2.200/swipe-app/health)
 * [http://192.168.2.200/stager-app/health](http://192.168.2.200/stager-app/health)
 * [http://192.168.2.200/superoverlay-app/health](http://192.168.2.200/superoverlay-app/health)
+* [http://192.168.2.200/jpip-app/health](http://192.168.2.200/jpip-app/health)
 
 Some of the URLs have *Swagger* API documentation and can be reached by adding the api path to the URL:
 
@@ -77,6 +78,7 @@ Some of the URLs have *Swagger* API documentation and can be reached by adding t
 * [http://192.168.2.200/swipe-app/api](http://192.168.2.200/swipe-app/api)
 * [http://192.168.2.200/stager-app/api](http://192.168.2.200/stager-app/api)
 * [http://192.168.2.200/superoverlay-app/api](http://192.168.2.200/superoverlay-app/api)
+* [http://192.168.2.200/jpip-app/api](http://192.168.2.200/jpip-app/api)
 
 
 # Notes

@@ -35,3 +35,12 @@ ossim:
   omar-app:
     serverURL: http://192.168.2.200/omar-app
     assetsURL: http://192.168.2.200/omar-app/assets/
+  jpip-app:
+    serverURL: http://192.168.2.200/jpip-app
+    assetsURL: http://192.168.2.200/jpip-app/assets/
+    server:
+      cache: /data/jpip-cache
+      ip: "192.168.2.108"
+      url: "jpip://192.168.2.108:8080"
+  jpip-server:
+    url: "jpip://192.168.2.108:8080"

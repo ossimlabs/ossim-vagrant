@@ -25,6 +25,12 @@ base:
   'omar-app.local':
     - ossim-core
     - omar-app
+  'jpip-app.local':
+    - ossim-core
+    - jpip-app
+  'jpip-server.local':
+    - ossim-core
+    - jpip-server
   'test.local':
     - java
     - ossim-core.yum-repo
