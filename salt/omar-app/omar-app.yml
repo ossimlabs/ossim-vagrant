@@ -43,8 +43,8 @@ omar:
       baseUrl: {{ salt['pillar.get']('ossim:swipe-app:serverURL')}}/swipe
       enabled: true
     jpipApp:
-      baseUrl: http://localhost:8084/jpip
-      enabled: false
+      baseUrl: {{ salt['pillar.get']('ossim:jpip-app:serverURL')}}/jpip
+      enabled: true
 #    basemaps:
 #      osm:
 #        baseUrl: http://geoserver-demo01.dev.ossim.org/geoserver/ged/wms?
