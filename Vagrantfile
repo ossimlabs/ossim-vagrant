@@ -186,6 +186,22 @@ Vagrant.configure(2) do |config|
     end
   end
 
+ config.vm.define "sqsApp" do |sqsApp|
+    sqsApp.vm.provider "virtualbox" do |vb|
+       vb.customize ["modifyvm", :id, "--memory", "1024"]
+    end
+   sqsApp.vm.network "private_network", ip: "192.168.2.109"
+   sqsApp.vm.hostname = "sqs-app.local"
+   sqsApp.ssh.forward_x11 = false
+   sqsApp.vm.provision :salt do |salt|
+     salt.minion_id = "sqs-app.local"
+     salt.masterless = true
+     salt.run_highstate = true
+#     salt.log_level = "all"
+#     salt.verbose = true
+   end
+ end
+
  config.vm.define "omarApp" do |omarApp|
     omarApp.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--memory", "1024"]

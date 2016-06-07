@@ -25,13 +25,27 @@ Now edit the vagrant file and make sure that you set a NFS share directory where
  
 where **\<source directory>** is a directory on your computer that you wish to NFS share and will be mounted on all the VM instances to location **/data**.
 
+By default the **sqsApp** settings will come up and will expect the **pillar/ossim.sls** to be edited with the proper credentials.  The variables must be defined:
+
+```
+cd ossim-vagrant
+vi pillar/ossim.sls
+```
+under the yaml root **ossim:sqs-app:** the variables need to be populated with proper locations and credentials
+
+ * **queue** The AWS SQS queue to pull messages from.
+ * **aws-access-key-id** The Credentials for the key ID.
+ * **aws-secret-access-key** The Secret Key
+
+
+If you do not want to have the sqsApp come up then you must comment the app lication out in the Vagrant file definition.
+
 
 Now bring up all the VMs
 
 ```
 vagrant up
 ```
-
 
 The **vagrant up** command will bring up the following VMs **httpd**, **postgres**, **WMTS**, **Stager**, **WMS**, **WFS**, **SuperOverlay**, **Swipe**, **OMAR Web UI** for a total of 9 VMs.  The vagrant id for each are as follows: **httpd**, **postgres**, **wmtsApp**, **stagerApp**, **wmsApp**, **wfsApp**, **superoverlayApp**, **swipeApp**, **omarApp**.
 
@@ -68,6 +82,7 @@ All services are running on their own VM and are reachable directly.  The direct
 * [http://192.168.2.200/stager-app/health](http://192.168.2.200/stager-app/health)
 * [http://192.168.2.200/superoverlay-app/health](http://192.168.2.200/superoverlay-app/health)
 * [http://192.168.2.200/jpip-app/health](http://192.168.2.200/jpip-app/health)
+* [http://192.168.2.200/sqs-app/health](http://192.168.2.200/sqs-app/health)
 
 Some of the URLs have *Swagger* API documentation and can be reached by adding the api path to the URL:
 

@@ -12,8 +12,10 @@ ossim:
     password: "postgres"
     dialect: "org.hibernate.spatial.dialect.postgis.PostgisDialect"
   wmts-app:
-    wmsUrl: http://192.168.2.200/wms-app/wms
-    wfsUrl: http://192.168.2.200/wfs-app/wfs
+#    wmsUrl: http://192.168.2.200/wms-app/wms
+#    wfsUrl: http://192.168.2.200/wfs-app/wfs
+    wmsUrl: http://o2.ossim.org/o2/wms
+    wfsUrl: http://o2.ossim.org/o2/wfs
     legacyWmsFlag: false
     serverURL: http://192.168.2.200/wmts-app
     assetsURL: http://192.168.2.200/wmts-app/assets/
@@ -35,6 +37,15 @@ ossim:
   omar-app:
     serverURL: http://192.168.2.200/omar-app
     assetsURL: http://192.168.2.200/omar-app/assets/
+  sqs-app:
+    serverURL: http://192.168.2.200/sqs-app
+    assetsURL: http://192.168.2.200/sqs-app/assets/
+    queue: ""
+    destinationType: "stdout"
+    urlEndPoint: ""
+    aws-access-key-id: ""
+    aws-secret-access-key: ""
+
   jpip-app:
     serverURL: http://192.168.2.200/jpip-app
     assetsURL: http://192.168.2.200/jpip-app/assets/

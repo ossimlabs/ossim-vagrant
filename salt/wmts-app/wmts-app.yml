@@ -1,5 +1,5 @@
 server:
-  contextPath: 
+  contextPath: /wmts-app 
   port: 8080
 
 environments:
@@ -18,6 +18,10 @@ omar:
     wfsUrl: {{ salt['pillar.get']('ossim:wmts-app:wfsUrl')}}
     wmsUrl: {{ salt['pillar.get']('ossim:wmts-app:wmsUrl')}}
     legacyWmsFlag: {{ salt['pillar.get']('ossim:wmts-app:legacyWmsFlag')}}
+    footprints:
+      url: "http://o2.ossim.org/o2/footprints/getFootprints"
+      layers: "omar:raster_entry"
+      styles: "byFileType"
 ---
 grails:
   serverURL: {{ salt['pillar.get']('ossim:wmts-app:serverURL')}}

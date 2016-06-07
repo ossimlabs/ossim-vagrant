@@ -1,0 +1,17 @@
+omar:
+  sqs:
+    reader:
+      queue: "{{ salt['pillar.get']('ossim:sqs-app:queue')}}"
+      waitTimeSeconds: 20
+      maxNumberOfMessages: 1
+      pollingIntervalSeconds: 1
+      destination:
+        type: "{{ salt['pillar.get']('ossim:sqs-app:destinationType')}}"
+        post:
+          urlEndPoint: "{{ salt['pillar.get']('ossim:sqs-app:urlEndPoint')}}"
+          field: message
+---
+grails:
+  serverURL: {{ salt['pillar.get']('ossim:sqs-app:serverURL')}}
+  assets:
+    url: {{ salt['pillar.get']('ossim:sqs-app:assetsURL')}}

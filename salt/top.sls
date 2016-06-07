@@ -6,6 +6,8 @@ base:
   '*-app.local':
     - java
     - ossim-core.yum-repo
+  'sqs-app.local':
+    - sqs-app
   'wmts-app.local':
     - wmts-app
   'wms-app.local':
