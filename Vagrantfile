@@ -202,6 +202,23 @@ Vagrant.configure(2) do |config|
    end
  end
 
+ config.vm.define "avroApp" do |avroApp|
+    avroApp.vm.provider "virtualbox" do |vb|
+       vb.customize ["modifyvm", :id, "--memory", "1024"]
+    end
+   avroApp.vm.network "private_network", ip: "192.168.2.110"
+   avroApp.vm.hostname = "avro-app.local"
+   avroApp.ssh.forward_x11 = false
+   avroApp.vm.provision :salt do |salt|
+     salt.minion_id = "avro-app.local"
+     salt.masterless = true
+     salt.run_highstate = true
+#     salt.log_level = "all"
+#     salt.verbose = true
+   end
+ end
+
+
  config.vm.define "omarApp" do |omarApp|
     omarApp.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--memory", "1024"]
