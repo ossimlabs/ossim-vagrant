@@ -41,10 +41,18 @@ ossim:
     serverURL: http://192.168.2.200/sqs-app
     assetsURL: http://192.168.2.200/sqs-app/assets/
     queue: ""
-    destinationType: "stdout"
-    urlEndPoint: ""
+    destinationType: "post"
+    urlEndPoint: "http://192.168.2.200/avro-app/avro/addMessage"
     aws-access-key-id: ""
     aws-secret-access-key: ""
+
+  avro-app:
+    serverURL: http://192.168.2.200/avro-app
+    assetsURL: http://192.168.2.200/avro-app/assets/
+    destinationType: "post"
+    rootDownloadDirectory: "/data/s3"
+    addRasterEndPoint: "http://192.168.2.200/stager-app/dataManager/addRaster"
+    addRasterField: "filename"
 
   jpip-app:
     serverURL: http://192.168.2.200/jpip-app
