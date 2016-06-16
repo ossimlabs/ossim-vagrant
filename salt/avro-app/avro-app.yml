@@ -1,0 +1,28 @@
+environments:
+  production:
+    dataSource:
+      pooled: true
+      jmxExport: true
+      driverClassName: org.postgresql.Driver
+      username: {{ salt['pillar.get']('ossim:database:username')}}
+      password: {{ salt['pillar.get']('ossim:database:password')}}
+      dialect: 'org.hibernate.spatial.dialect.postgis.PostgisDialect'
+      url: {{ salt['pillar.get']('ossim:database:connection')}}
+omar:
+  avro:
+    sourceUriField: "S3_URI_Nitf"
+    dateField: "Observation_Date"
+    dateFieldFormat: "yyyyMMddHHmmss"
+    imageIdField: "Image_Id"
+    download:
+      directory: "{{ salt['pillar.get']('ossim:avro-app:rootDownloadDirectory')}}"
+    destination:
+      type: "{{ salt['pillar.get']('ossim:avro-app:destinationType')}}"
+      post:
+        addRasterEndPoint: "{{ salt['pillar.get']('ossim:avro-app:addRasterEndPoint')}}"
+        addRasterField: "{{ salt['pillar.get']('ossim:avro-app:addRasterField')}}"
+---
+grails:
+  serverURL: {{ salt['pillar.get']('ossim:avro-app:serverURL')}}
+  assets:
+    url: {{ salt['pillar.get']('ossim:avro-app:assetsURL')}}
