@@ -8,6 +8,8 @@ base:
     - ossim-core.yum-repo
   'sqs-app.local':
     - sqs-app
+  'avro-app.local':
+    - avro-app
   'wmts-app.local':
     - wmts-app
   'wms-app.local':
