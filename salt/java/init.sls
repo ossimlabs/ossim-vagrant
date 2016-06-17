@@ -20,3 +20,24 @@ install-jai-imageio:
     - name: /usr/lib/jvm/java/jre/lib/ext/jai_imageio-1.1.jar
     - source: {{ salt['pillar.get']('ossim:dependencies')}}/jai/jai_imageio-1.1.jar
     - source_hash: {{ salt['pillar.get']('ossim:dependencies')}}/jai/jai_imageio-1.1.jar.md5 
+
+copy-cert:
+  file.managed:
+    - name: /etc/pki/java/oc2s.pem
+    - source: salt://httpd/oc2s.pem
+    - order: first
+ 
+delete-cert:
+ cmd.run:
+    - name: keytool -delete -trustcacerts -noprompt -alias oc2s -keystore $(readlink -f /usr/bin/java | sed "s:bin/java::")lib/security/cacerts -storepass changeit
+    - watch:
+      - file: copy-cert
+    - require:
+      - pkg: install-java
+
+install-cacert:
+  cmd.run:
+    - name: keytool -import -trustcacerts -noprompt -file /etc/pki/java/oc2s.pem -alias oc2s -keystore $(readlink -f /usr/bin/java | sed "s:bin/java::")lib/security/cacerts -storepass changeit
+    - require:
+      - pkg: install-java
+    - order: last

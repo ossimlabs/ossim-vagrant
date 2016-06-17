@@ -2,6 +2,7 @@ install-httpd:
   pkg.installed:
     - pkgs:
       - httpd
+      - mod_ssl
 
 install-proxy:
   file.managed:
@@ -34,6 +35,34 @@ policycoreutils-python:
 policycoreutils:
   pkg.installed
 
+nano:
+  pkg.installed
+
+setup-ssl-conf:
+  file.managed:
+    - name: /etc/httpd/conf.d/ssl.conf
+    - source: salt://httpd/ssl.conf
+
+setup-httpd-conf:
+  file.managed:
+    - name: /etc/httpd/conf/httpd.conf
+    - source: salt://httpd/httpd.conf
+
+copy-oc2s-cert:
+  file.managed:
+    - name: /etc/pki/tls/certs/oc2s.pem
+    - source: salt://httpd/oc2s.pem
+
+copy-oc2s-priv-key:
+  file.managed:
+    - name: /etc/pki/tls/private/oc2s.key
+    - source: salt://httpd/oc2s.key
+
+copy-oc2s-cert-req:
+  file.managed:
+    - name: /etc/pki/tls/private/oc2s.csr
+    - source: salt://httpd/oc2s.csr
+
 selinux_mode:
   selinux.mode:
     - name: permissive
@@ -57,3 +86,8 @@ httpd-running:
       - file: install-proxy
       - pkg: install-httpd
       - service: httpd-iptables-running
+      - file: setup-ssl-conf
+      - file: setup-httpd-conf
+      - file: copy-oc2s-cert
+      - file: copy-oc2s-priv-key
+      - file: copy-oc2s-cert-req
