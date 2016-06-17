@@ -1,0 +1,78 @@
+elevation_manager.elevation_source1.type: dted_directory
+elevation_manager.elevation_source1.connection_string: /data/elevation/dted/1k
+elevation_manager.elevation_source1.min_open_cells: 5
+elevation_manager.elevation_source1.max_open_cells: 25
+elevation_manager.elevation_source1.enabled: true
+elevation_manager.elevation_source1.memory_map_cells: false
+
+elevation_manager.elevation_source15.type: srtm_directory
+elevation_manager.elevation_source15.connection_string: /data/elevation/srtm3
+elevation_manager.elevation_source15.min_open_cells: 25
+elevation_manager.elevation_source15.max_open_cells: 50 
+elevation_manager.elevation_source15.memory_map_cells: false
+
+//elevation_manager.elevation_source15.type: image_directory
+//elevation_manager.elevation_source15.connection_string: /data/elevation/tiff_3arc
+//elevation_manager.elevation_source15.min_open_cells: 25
+//elevation_manager.elevation_source15.max_open_cells: 50 
+//elevation_manager.elevation_source15.memory_map_cells: false
+
+//elevation_manager.elevation_source20.type: dted_directory
+//elevation_manager.elevation_source20.connection_string: /data/elevation/dted/level2
+//elevation_manager.elevation_source20.min_open_cells: 500
+//elevation_manager.elevation_source20.max_open_cells: 1000 
+//elevation_manager.elevation_source20.memory_map_cells: true
+
+elevation_manager.use_geoid_if_null: false
+elevation_manager.default_height_above_ellipsoid: nan
+elevation_manager.elevation_offset:  nan
+
+epsg_database_file1: $(OSSIM_DEV_HOME)/ossim/share/ossim/projection/ossim_epsg_projections-v7_4.csv
+epsg_database_file2: $(OSSIM_DEV_HOME)/ossim/share/ossim/projection/ossim_harn_state_plane_epsg.csv
+epsg_database_file3: $(OSSIM_DEV_HOME)/ossim/share/ossim/projection/ossim_state_plane_spcs.csv
+epsg_database_file4: $(OSSIM_DEV_HOME)/ossim/share/ossim/projection/ossim_harn_state_plane_esri.csv
+
+wkt_database_file: $(OSSIM_DEV_HOME)/ossim/share/ossim/projection/ossim_wkt_pcs.csv
+
+plugin1.file: $(OSSIM_BUILD_DIR)/lib64/libossim_sqlite_plugin.so
+plugin5.file: $(OSSIM_BUILD_DIR)/lib64/libossim_opencv_plugin.so
+plugin10.file: $(OSSIM_BUILD_DIR)/lib64/libossim_hdf5_plugin.so
+plugin15.file: $(OSSIM_BUILD_DIR)/lib64/libossim_kakadu_plugin.so
+plugin15.options: """
+                 reader_factory.location:back
+                 writer_factory.location:back
+                 """
+plugin20.file: $(OSSIM_BUILD_DIR)/lib64/libossim_cnes__plugin.so
+plugin25.file: $(OSSIM_BUILD_DIR)/lib64/libossim_web_plugin.so
+//plugin25.options: """
+//                 reader_factory.location:front
+//                 writer_factory.location:front
+//                 """
+//plugin30.file: $(OSSIM_BUILD_DIR)/lib64/libossim_png_plugin.so
+//plugin35.file: $(OSSIM_BUILD_DIR)/lib64/libossim_mrsid_plugin.so
+plugin40.file: $(OSSIM_BUILD_DIR)/lib64/libossim_gdal_plugin.so
+plugin40.options: """
+                 reader_factory.location:back
+                 writer_factory.location:back
+                 """
+
+
+//plugin45.file:$(OSSIM_BUILD_DIR)/lib64/libossim_libraw_plugin.so
+
+
+//plugin50.file:$(OSSIM_BUILD_DIR)/lib64/libossim_foo_plugin.so
+
+//csm_plugin_path: /Users/Shared/Development/CrystalView/CrystalViewSMPlugin/build/Release/
+geoid_egm_96_grid: $(OSSIM_DEV_HOME)/ossim/share/ossim/geoids/egm96.grd
+
+//geoid_manager.geoid_source1.type: egm_96_grid
+//geoid_manager.geoid_source1.connection_string: $(OSSIM_DEV_HOME)/ossim_package_support/geoids/geoid1996/egm96.grd
+//geoid_manager.geoid_source1.name: geoid1996
+
+
+tile_size: 64 64 
+//tile_size: 64 64 
+cache_size:512
+kakadu_threads: 8
+
+
