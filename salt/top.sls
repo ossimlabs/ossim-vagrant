@@ -35,6 +35,12 @@ base:
   'jpip-server.local':
     - ossim-core
     - jpip-server
+  'dev-build.local':
+    - java
+    - ossim-core.yum-repo
+    - x11-min
+    - omar-user
+    - dev-build
   'test.local':
     - java
     - ossim-core.yum-repo
