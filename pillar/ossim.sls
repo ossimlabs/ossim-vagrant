@@ -12,10 +12,8 @@ ossim:
     password: "postgres"
     dialect: "org.hibernate.spatial.dialect.postgis.PostgisDialect"
   wmts-app:
-#    wmsUrl: http://192.168.2.200/wms-app/wms
-#    wfsUrl: http://192.168.2.200/wfs-app/wfs
-    wmsUrl: http://o2.ossim.org/o2/wms
-    wfsUrl: http://o2.ossim.org/o2/wfs
+    wmsUrl: http://192.168.2.200/wms-app/wms
+    wfsUrl: http://192.168.2.200/wfs-app/wfs
     legacyWmsFlag: false
     serverURL: https://192.168.2.200/wmts-app
     assetsURL: https://192.168.2.200/wmts-app/assets/
