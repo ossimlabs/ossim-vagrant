@@ -30,9 +30,3 @@ install-{{app_name}}:
     - init_delay: 60
     - watch:
       - file: {{app_name}}-config
-
----
-grails:
-  serverURL: {{ salt['pillar.get']('ossim:wmts-app:serverURL')}}
-  assets:
-    url: {{ salt['pillar.get']('ossim:wmts-app:assetsURL')}}
