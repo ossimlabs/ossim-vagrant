@@ -14,8 +14,9 @@ environments:
       url: {{ salt['pillar.get']('ossim:database:connection')}}
 
 quartz:
-    jdbcStore: false
-
+  jdbcStore: false
+  threadPool:
+    threadCount: 4
 ---
 grails:
   serverURL: {{ salt['pillar.get']('ossim:stager-app:serverURL')}}
