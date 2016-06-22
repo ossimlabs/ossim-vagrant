@@ -8,6 +8,7 @@ environments:
       password: {{ salt['pillar.get']('ossim:database:password')}}
       dialect: 'org.hibernate.spatial.dialect.postgis.PostgisDialect'
       url: {{ salt['pillar.get']('ossim:database:connection')}}
+
 omar:
   avro:
     sourceUriField: "S3_URI_Nitf"
@@ -21,6 +22,13 @@ omar:
       post:
         addRasterEndPoint: "{{ salt['pillar.get']('ossim:avro-app:addRasterEndPoint')}}"
         addRasterField: "{{ salt['pillar.get']('ossim:avro-app:addRasterField')}}"
+        addRasterEndPointParams:
+          background: "true"
+          buildHistograms: "true"
+          buildOverviews: "true"
+          overviewCompressionType: "NONE"
+          overviewType: "ossim_tiff_box"
+          filename: ""
 ---
 grails:
   serverURL: {{ salt['pillar.get']('ossim:avro-app:serverURL')}}
