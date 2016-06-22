@@ -95,16 +95,6 @@ checkout-ossim:
     - require:
       - pkg: install-deps
 
-checkout-ossim-gui:
-  git.latest:
-    - name: https://github.com/ossimlabs/ossim-gui.git
-    - rev: dev
-    - branch: dev
-    - target: /home/vagrant/ossim-gui
-    - user: vagrant
-    - require:
-      - pkg: install-deps
-
 checkout-omar:
   git.latest:
     - name: https://github.com/ossimlabs/omar.git
@@ -119,16 +109,12 @@ checkout-omar:
     - require:
       - pkg: install-deps
 
-checkout-oms:
+checkout-ossim-gui:
   git.latest:
-    - name: https://github.com/ossimlabs/ossim-oms.git
+    - name: https://github.com/ossimlabs/ossim-gui.git
     - rev: dev
     - branch: dev
-    # - force_checkout: true
-    # - force_clone: true
-    # - force_fetch: true
-    # - force_reset: true
-    - target: /home/vagrant/ossim-oms
+    - target: /home/vagrant/ossim-gui
     - user: vagrant
     - require:
       - pkg: install-deps
@@ -199,7 +185,7 @@ checkout-ossim-wms:
     - require:
       - pkg: install-deps
 
-checkout-ossim-open-scene-graph:
+checkout-open-scene-graph:
   git.latest:
     - name: https://github.com/openscenegraph/OpenSceneGraph.git
     - rev: OpenSceneGraph-3.2
