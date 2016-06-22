@@ -28,6 +28,7 @@ Vagrant.configure(2) do |config|
     postgres.vm.box = "bento/centos-6.7"
     postgres.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--memory", "1024"]
+       vb.name = "vagrant-postgres"
     end
     postgres.vm.network "private_network", ip: "192.168.2.100"
     postgres.vm.hostname = "postgres.local"
@@ -45,6 +46,7 @@ Vagrant.configure(2) do |config|
     httpd.vm.box = "bento/centos-6.7"
     httpd.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--memory", "1024"]
+       vb.name = "vagrant-httpd"
     end
     httpd.vm.network "private_network", ip: "192.168.2.200"
     httpd.vm.hostname = "httpd.local"
@@ -61,6 +63,7 @@ Vagrant.configure(2) do |config|
   config.vm.define "wmtsApp" do |wmtsApp|
     wmtsApp.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--memory", "1024"]
+       vb.name = "vagrant-wmtsApp"
     end
     wmtsApp.vm.network "private_network", ip: "192.168.2.101"
     wmtsApp.vm.hostname = "wmts-app.local"
@@ -77,6 +80,7 @@ Vagrant.configure(2) do |config|
   config.vm.define "stagerApp" do |stagerApp|
     stagerApp.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--memory", "1024"]
+       vb.name = "vagrant-stagerApp"
     end
     stagerApp.vm.network "private_network", ip: "192.168.2.102"
     stagerApp.vm.hostname = "stager-app.local"
@@ -93,6 +97,7 @@ Vagrant.configure(2) do |config|
   config.vm.define "wmsApp" do |wmsApp|
     wmsApp.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--memory", "1024"]
+       vb.name = "vagrant-wmsApp"
     end
     wmsApp.vm.network "private_network", ip: "192.168.2.103"
     wmsApp.vm.hostname = "wms-app.local"
@@ -109,6 +114,7 @@ Vagrant.configure(2) do |config|
   config.vm.define "wfsApp" do |wfsApp|
     wfsApp.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--memory", "1024"]
+       vb.name = "vagrant-wfsApp"
     end
     wfsApp.vm.network "private_network", ip: "192.168.2.104"
     wfsApp.vm.hostname = "wfs-app.local"
@@ -125,6 +131,7 @@ Vagrant.configure(2) do |config|
   config.vm.define "superoverlayApp" do |superoverlayApp|
     superoverlayApp.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--memory", "1024"]
+       vb.name = "vagrant-superoverlayApp"
     end
     superoverlayApp.vm.network "private_network", ip: "192.168.2.105"
     superoverlayApp.vm.hostname = "superoverlay-app.local"
@@ -141,6 +148,7 @@ Vagrant.configure(2) do |config|
   config.vm.define "swipeApp" do |swipeApp|
    swipeApp.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--memory", "1024"]
+       vb.name = "vagrant-swipeApp"
     end
     swipeApp.vm.network "private_network", ip: "192.168.2.106"
     swipeApp.vm.hostname = "swipe-app.local"
@@ -157,6 +165,7 @@ Vagrant.configure(2) do |config|
   config.vm.define "jpipApp" do |jpipApp|
    jpipApp.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--memory", "1024"]
+       vb.name = "vagrant-jpipApp"
     end
     jpipApp.vm.network "private_network", ip: "192.168.2.107"
     jpipApp.vm.hostname = "jpip-app.local"
@@ -173,6 +182,7 @@ Vagrant.configure(2) do |config|
   config.vm.define "jpipServer" do |jpipServer|
    jpipServer.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--memory", "1024"]
+       vb.name = "vagrant-jpipServer"
     end
     jpipServer.vm.network "private_network", ip: "192.168.2.108"
     jpipServer.vm.hostname = "jpip-server.local"
@@ -189,6 +199,7 @@ Vagrant.configure(2) do |config|
  config.vm.define "sqsApp" do |sqsApp|
     sqsApp.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--memory", "1024"]
+       vb.name = "vagrant-sqsApp"
     end
    sqsApp.vm.network "private_network", ip: "192.168.2.109"
    sqsApp.vm.hostname = "sqs-app.local"
@@ -205,6 +216,7 @@ Vagrant.configure(2) do |config|
  config.vm.define "avroApp" do |avroApp|
     avroApp.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--memory", "1024"]
+       vb.name = "vagrant-avroApp"
     end
    avroApp.vm.network "private_network", ip: "192.168.2.110"
    avroApp.vm.hostname = "avro-app.local"
@@ -222,6 +234,7 @@ Vagrant.configure(2) do |config|
  config.vm.define "omarApp" do |omarApp|
     omarApp.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--memory", "1024"]
+       vb.name = "vagrant-omarApp"
     end
    omarApp.vm.network "private_network", ip: "192.168.2.120"
    omarApp.vm.hostname = "omar-app.local"
@@ -249,6 +262,7 @@ Vagrant.configure(2) do |config|
       vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
         # Enable, if Guest Additions are installed, whether hardware 3D acceleration should be available
       vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
+      vb.name = "vagrant-devBuild"
     end
    devBuild.vm.box = "centos/7"
    devBuild.vm.network "private_network", ip: "192.168.2.141"
