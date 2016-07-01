@@ -6,6 +6,7 @@ intall-ossim-core:
     - pkgs:
       - ossim
       - ossim-kakadu-plugin
+      - ossim-jpeg12-plugin
       - ossim-gdal-plugin
       - ossim-hdf5-plugin
       - ossim-geopdf-plugin
