@@ -1,5 +1,5 @@
 server:
-  contextPath: /wmts-app 
+  contextPath: 
   port: 8080
 
 environments:
