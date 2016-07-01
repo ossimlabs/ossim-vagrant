@@ -23,6 +23,9 @@ ossim:
   wms-app:
     serverURL: https://192.168.2.200/wms-app
     assetsURL: https://192.168.2.200/wms-app/assets/
+  wcs-app:
+    serverURL: https://192.168.2.200/wcs-app
+    assetsURL: https://192.168.2.200/wcs-app/assets/
   wfs-app:
     serverURL: https://192.168.2.200/wfs-app
     assetsURL: https://192.168.2.200/wfs-app/assets/

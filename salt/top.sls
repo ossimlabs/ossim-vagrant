@@ -15,6 +15,9 @@ base:
   'wms-app.local':
     - ossim-core
     - wms-app
+  'wcs-app.local':
+    - ossim-core
+    - wcs-app
   'wfs-app.local':
     - ossim-core
     - wfs-app
