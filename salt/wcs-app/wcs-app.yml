@@ -1,0 +1,56 @@
+server:
+  contextPath: 
+  port: 8080
+
+environments:
+  production:
+    dataSource:
+      pooled: true
+      jmxExport: true
+      driverClassName: org.postgresql.Driver
+      username: {{ salt['pillar.get']('ossim:database:username')}}
+      password: {{ salt['pillar.get']('ossim:database:password')}}
+      dialect: 'org.hibernate.spatial.dialect.postgis.PostgisDialect'
+      url: {{ salt['pillar.get']('ossim:database:connection')}}
+
+wfs:
+  featureTypeNamespaces:
+      - prefix: omar
+        uri: http://omar.ossim.org
+
+  datastores:
+      - namespaceId: omar
+        datastoreId: {{ salt['pillar.get']('ossim:database:name')}}
+        datastoreParams:
+          dbtype: postgis
+          host: {{ salt['pillar.get']('ossim:database:host')}}
+          port: '{{ salt['pillar.get']('ossim:database:port')}}'
+          database: {{ salt['pillar.get']('ossim:database:name')}}
+          user: {{ salt['pillar.get']('ossim:database:username')}}
+          passwd: {{ salt['pillar.get']('ossim:database:password')}}
+          'Expose primary keys': 'true'
+          namespace: http://omar.ossim.org
+  featureTypes:
+      - name: raster_entry
+        title: raster_entry
+        description: ''
+        keywords:
+          - omar
+          - raster_entry
+          - features
+        datastoreId: {{ salt['pillar.get']('ossim:database:name')}}
+
+      - name: video_data_set
+        title: video_data_set
+        description: ''
+        keywords:
+          - omar
+          - video_data_set
+          - features
+        datastoreId: {{ salt['pillar.get']('ossim:database:name')}}
+
+---
+grails:
+  serverURL: {{ salt['pillar.get']('ossim:wcs-app:serverURL')}}
+  assets:
+    url: {{ salt['pillar.get']('ossim:wcs-app:assetsURL')}}
