@@ -1,0 +1,19 @@
+server:
+  contextPath:
+  port: 8080
+
+ environments:
+   production:
+     dataSource:
+       pooled: true
+       jmxExport: true
+       driverClassName: org.postgresql.Driver
+       username: {{ salt['pillar.get']('ossim:database:username')}}
+       password: {{ salt['pillar.get']('ossim:database:password')}}
+       dialect: 'org.hibernate.spatial.dialect.postgis.PostgisDialect'
+       url: {{ salt['pillar.get']('ossim:database:connection')}}
+---
+grails:
+  serverURL: {{ salt['pillar.get']('ossim:download-app:serverURL')}}
+  assets:
+    url: {{ salt['pillar.get']('ossim:download-app:assetsURL')}}

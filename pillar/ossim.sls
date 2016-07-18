@@ -3,11 +3,11 @@ ossim:
   group: omar
   yum_repo: http://s3.amazonaws.com/o2-rpms
   dependencies: http://s3.amazonaws.com/ossimlabs/dependencies
-  database: 
+  database:
     name: omardb-prod
     host: 192.168.2.100
     port: 5432
-    connection: "jdbc:postgresql://192.168.2.100:5432/omardb-prod" 
+    connection: "jdbc:postgresql://192.168.2.100:5432/omardb-prod"
     username: "postgres"
     password: "postgres"
     dialect: "org.hibernate.spatial.dialect.postgis.PostgisDialect"
@@ -26,6 +26,9 @@ ossim:
   wcs-app:
     serverURL: https://192.168.2.200/wcs-app
     assetsURL: https://192.168.2.200/wcs-app/assets/
+  download-app:
+    serverURL: https://192.168.2.200/download-app
+    assetsURL: https://192.168.2.200/download-app/assets/
   wfs-app:
     serverURL: https://192.168.2.200/wfs-app
     assetsURL: https://192.168.2.200/wfs-app/assets/

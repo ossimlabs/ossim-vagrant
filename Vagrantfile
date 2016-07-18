@@ -230,20 +230,37 @@ Vagrant.configure(2) do |config|
    end
  end
 
- config.vm.define "wcsApp" do |avroApp|
-    avroApp.vm.provider "virtualbox" do |vb|
+ config.vm.define "wcsApp" do |wcsApp|
+    wcsApp.vm.provider "virtualbox" do |vb|
        vb.customize ["modifyvm", :id, "--memory", "1024"]
-       vb.name = "vagrant-avroApp"
+       vb.name = "vagrant-wcsApp"
     end
-   avroApp.vm.network "private_network", ip: "192.168.2.111"
-   avroApp.vm.hostname = "wcs-app.local"
-   avroApp.ssh.forward_x11 = false
-   avroApp.vm.provision :salt do |salt|
+   wcsApp.vm.network "private_network", ip: "192.168.2.111"
+   wcsApp.vm.hostname = "wcs-app.local"
+   wcsApp.ssh.forward_x11 = false
+   wcsApp.vm.provision :salt do |salt|
      salt.minion_id = "wcs-app.local"
      salt.masterless = true
      salt.run_highstate = true
 #     salt.log_level = "all"
 #     salt.verbose = true
+   end
+ end
+
+ config.vm.define "downloadApp" do |downloadApp|
+    downloadApp.vm.provider "virtualbox" do |vb|
+       vb.customize ["modifyvm", :id, "--memory", "1024"]
+       vb.name = "vagrant-downloadApp"
+    end
+   downloadApp.vm.network "private_network", ip: "192.168.2.112"
+   downloadApp.vm.hostname = "download-app.local"
+   downloadApp.ssh.forward_x11 = false
+   downloadApp.vm.provision :salt do |salt|
+     salt.minion_id = "download-app.local"
+     salt.masterless = true
+     salt.run_highstate = true
+ #     salt.log_level = "all"
+ #     salt.verbose = true
    end
  end
 
@@ -318,6 +335,6 @@ Vagrant.configure(2) do |config|
 #      salt.log_level = "all"
 #    end
 #  end
-  
+
   #config.vm.provision "shell", path: "postup.sh"
 end

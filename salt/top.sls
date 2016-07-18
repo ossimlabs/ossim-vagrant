@@ -21,6 +21,8 @@ base:
   'wfs-app.local':
     - ossim-core
     - wfs-app
+  'download-app.local':
+    - download-app
   'superoverlay-app.local':
     - ossim-core
     - superoverlay-app
@@ -49,5 +51,3 @@ base:
     - ossim-core.yum-repo
     - omar-user
     - wmts-app
-
-
