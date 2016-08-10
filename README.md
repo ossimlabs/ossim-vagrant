@@ -129,3 +129,32 @@ openssl req -x509 -nodes -newkey rsa:2048 \
   -subj '/C=XX/ST=XXXX/L=XXXX/O=XXXX/OU=XXXX/CN=www.radiantblue.com/emailAddress=postmaster@radiantblue.com'
 openssl req -new -key /data/oc2s.key -out /data/oc2s.csr
 ```
+
+#Jenkins HelloWorld Build VM
+
+`vagrant up jenkins`
+
+After provisioning you should see the echo of the URL and the Jenkins temporary root token ID for initial login.  When the jenkins is provisioned you will have installed and access to the latest development RPMS for the entire OSSIM baseline.  We will now do a simple guide for a vanilla hello world plugin build to test the build.  
+
+After the vagrant up is performed you will need to copy the token ID echoed to the screen.  If you do not see it this might be because the jenkins didn't come up fast enough before the echo occured and you might need to run `vagrant provision jenkins` again to see it.  We did add a 60 second delay so it should print on first provision.
+
+
+[http://192.168.2.150:8080/jenkins](http://192.168.2.150:8080/jenkins)
+
+
+In this example we will build the simple vanilla **HelloWorldPlugin** provided on our github site.  First login and setup jenkins for initial use be taking the default setup and adding a user.  The user can be anything and is used to log into jenkins. Once the setup is complete create a new ***freeform project***.  We will use a simple shell script to build the plugin.  You can create a project with the name **HelloWorldPlugin**.  
+
+* First, create a new job and give it a name **HelloWorldPlugin** then select freestyle project and hit Ok.
+* Next add the git repo: https://github.com/ossimlabs/ossim-helloworld-plugin.git to the Source code management section of Jenkins project you just created and add to the ***Additoinal Behaviors*** to checkout the repo to a directory called ***ossim-helloworld-plugin***.  Select the additional behavior called **Checkout to a subdirectory**.  Make sure the branch is set to dev.
+* Add a build step called **execute shell** and assuming that the OSSIM_VERSION is 1.9.0 then add a build shell with the following contents
+
+```
+export OSSIM_VERSION=1.9.0
+
+mkdir -p ${WORKSPACE}/build
+pushd ${WORKSPACE}/build
+cmake ../ossim-helloworld-plugin -DCMAKE_INSTALL_PREFIX=${WORKSPACE}/install -DCMAKE_MODULE_PATH=/usr/share/ossim/1.9.0/CMakeModules
+make install
+popd
+```
+* Now hit save and hit the build button and start the build.
