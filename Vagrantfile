@@ -310,8 +310,23 @@ Vagrant.configure(2) do |config|
    end
  end
 
+  config.vm.define "jenkins", autostart: false do |jenkins|
+    jenkins.vm.box = "centos/7"
+    jenkins.vm.network "private_network", ip: "192.168.2.150"
+    jenkins.vm.hostname = "jenkins.local"
+    jenkins.ssh.forward_x11 = true
+    jenkins.vm.provision :salt do |salt|
+      salt.minion_id = "jenkins.local"
+      salt.masterless = true
+      salt.run_highstate = true
+      salt.log_level = "all"
+    end
+    jenkins.vm.provision "shell", inline: "if [ -f /usr/share/tomcat/.jenkins/secrets/initialAdminPassword ] ; then echo Jenkins Initial Admin Password: `cat /usr/share/tomcat/.jenkins/secrets/initialAdminPassword`; fi; echo URL: http://192.168.2.150:8080/jenkins"
 
-#  config.vm.define "test" do |test|
+  end
+
+
+#  config.vm.define "test", autostart: false do |test|
 #    test.vm.box = "centos/7"
 #    test.vm.network "private_network", ip: "192.168.2.140"
 #    test.vm.hostname = "test.local"

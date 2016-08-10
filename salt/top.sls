@@ -46,8 +46,10 @@ base:
     - x11-min
     - omar-user
     - dev-build
+  'jenkins.local':
+    - java
+    - ossim-core.yum-repo
+    - jenkins
   'test.local':
     - java
     - ossim-core.yum-repo
-    - omar-user
-    - wmts-app
