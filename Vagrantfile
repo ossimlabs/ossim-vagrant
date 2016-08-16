@@ -321,10 +321,8 @@ Vagrant.configure(2) do |config|
       salt.run_highstate = true
       salt.log_level = "all"
     end
-    jenkins.vm.provision "shell", inline: "if [ -f /usr/share/tomcat/.jenkins/secrets/initialAdminPassword ] ; then echo Jenkins Initial Admin Password: `cat /usr/share/tomcat/.jenkins/secrets/initialAdminPassword`; fi; echo URL: http://192.168.2.150:8080/jenkins"
-
+    jenkins.vm.provision "shell", inline: "if [ -f /var/lib/jenkins/secrets/initialAdminPassword ] ; then echo Jenkins Initial Admin Password: `cat /var/lib/jenkins/secrets/initialAdminPassword`; fi; echo URL: http://192.168.2.150:8080/"
   end
-
 
 #  config.vm.define "test", autostart: false do |test|
 #    test.vm.box = "centos/7"

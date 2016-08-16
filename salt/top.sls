@@ -6,6 +6,10 @@ base:
   '*-app.local':
     - java
     - ossim-core.yum-repo
+  'jenkins*.local':
+    - java
+    - ossim-core.yum-repo
+    - jenkins.yum-repo
   'sqs-app.local':
     - sqs-app
   'avro-app.local':
@@ -50,6 +54,7 @@ base:
     - java
     - ossim-core.yum-repo
     - jenkins
+    - jenkins.ossim-devel-install
   'test.local':
     - java
     - ossim-core.yum-repo
