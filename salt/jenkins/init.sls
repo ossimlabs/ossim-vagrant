@@ -1,8 +1,12 @@
 install-jenkins:
   pkg.installed:
     - pkgs:
+      - jenkins
+
+install-dev:
+  pkg.installed:
+    - pkgs:
       - wget
-      - tomcat
       - gcc
       - gcc-c++
       - cmake
@@ -37,24 +41,12 @@ install-jenkins:
       - mesa-libGL-devel
       - mesa-libOSMesa-devel
       - OpenThreads-devel
-      - ossim-devel
 
-
-
-install-war:
-  file.managed:
-    - name: /usr/share/tomcat/webapps/jenkins.war
-    - source: https://updates.jenkins-ci.org/latest/jenkins.war
-    - skip_verify: true
-    - user: tomcat
-    - group: tomcat
-    - unless: stat /usr/share/tomcat/webapps/jenkins.war
-
-tomcat-service:
+jenkins-service:
   service.running:
-    - name: tomcat.service
+    - name: jenkins
     - enable: true
     - reload: false
     - init_delay: 60
     - require:
-      - file: install-war
+      - pkg: install-jenkins
