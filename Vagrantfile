@@ -324,18 +324,20 @@ Vagrant.configure(2) do |config|
     jenkins.vm.provision "shell", inline: "if [ -f /var/lib/jenkins/secrets/initialAdminPassword ] ; then echo Jenkins Initial Admin Password: `cat /var/lib/jenkins/secrets/initialAdminPassword`; fi; echo URL: http://192.168.2.150:8080/"
   end
 
-#  config.vm.define "test", autostart: false do |test|
-#    test.vm.box = "centos/7"
-#    test.vm.network "private_network", ip: "192.168.2.140"
-#    test.vm.hostname = "test.local"
-#    test.ssh.forward_x11 = true
-#    test.vm.provision :salt do |salt|
-#      salt.minion_id = "test.local"
-#      salt.masterless = true
-#      salt.run_highstate = true
-#      salt.log_level = "all"
-#    end
+
+#config.vm.define "test" do |test|
+#  test.vm.box = "centos/7"
+#  test.vm.network "private_network", ip: "192.168.2.140"
+#  test.vm.hostname = "test.local"
+#  test.ssh.forward_x11 = true
+#  test.vm.provision :salt do |salt|
+#    salt.minion_id = "test.local"
+#    salt.masterless = true
+#    salt.run_highstate = true
+#    salt.log_level = "all"
 #  end
+#end
+
 
 #  config.vm.define "workflow" do |workflow|
 #    workflow.vm.network "private_network", ip: "192.168.2.130"
