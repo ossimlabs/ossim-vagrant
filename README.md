@@ -47,7 +47,7 @@ Now bring up all the VMs
 vagrant up
 ```
 
-The **vagrant up** command will bring up the following VMs **httpd**, **postgres**, **WMTS**, **Stager**, **WMS**, **WFS**, **SuperOverlay**, **Swipe**, **OMAR Web UI** for a total of 9 VMs.  The vagrant id for each are as follows: **httpd**, **postgres**, **wmtsApp**, **stagerApp**, **wmsApp**, **wfsApp**, **superoverlayApp**, **swipeApp**, **omarApp**.
+The **vagrant up** command will bring up the following VMs **httpd**, **postgres**, **WMTS**, **Stager**, **WMS**, **WFS**, **WCS**, **SuperOverlay**, **Swipe**, **OMAR Web UI**, **JPIP App**, **JPIP Server**, **Avro**, **Download**, **DEV Build**, **Jenkins** for a total of 16 VMs.  The vagrant id for each are as follows: **httpd**, **postgres**, **wmtsApp**, **stagerApp**, **wmsApp**, **wfsApp**, **wcsApp**, **superoverlayApp**, **swipeApp**, **omarApp**, **jpipApp**, **jpipServer**, **avroApp**, **downloadApp**, **devBuild**, **jenkins**.
 
 Each individual vagrant WM instance can be specified if you do not want to bring all the VMs up at once.   For instance,  if you just want to use the wmts interface it uses the WMS, and WFS and we will need the proxy and the postgres database.  To get data into the system add the stagerApp VM.  We can issue the following command to specify individual VM instances.
 
