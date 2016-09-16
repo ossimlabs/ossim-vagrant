@@ -13,6 +13,8 @@ install-deps:
       - nasm
       - maven
       - gpstk-devel
+      - OpenSceneGraph-devel
+      - ffmpeg-devel
       - proj
       - proj-devel
       - proj-epsg
@@ -35,6 +37,7 @@ install-deps:
       - mesa-libGLU-devel
       - mesa-libGL-devel
       - mesa-libOSMesa-devel
+      - qt5-qtbase-devel
 
 usr-local-permissions:
   file.directory:

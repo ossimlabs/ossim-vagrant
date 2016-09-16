@@ -1,3 +1,7 @@
+file_roots:
+    base:
+      - /srv/salt/
+      - /srv/formulas/jenkins-formula
 base:
   'postgres.local':
     - postgres
@@ -9,7 +13,7 @@ base:
   'jenkins*.local':
     - java
     - ossim-core.yum-repo
-    - jenkins.yum-repo
+#    - jenkins-setup.yum-repo
   'sqs-app.local':
     - sqs-app
   'avro-app.local':
@@ -53,8 +57,10 @@ base:
   'jenkins.local':
     - java
     - ossim-core.yum-repo
+#    - jenkins-setup
     - jenkins
-    - jenkins.ossim-devel-install
+    - jenkins.plugins
+#    - jenkins.ossim-devel-install
   'test.local':
     - java
     - ossim-core.yum-repo
