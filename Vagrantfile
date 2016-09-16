@@ -317,6 +317,7 @@ Vagrant.configure(2) do |config|
     jenkins.ssh.forward_x11 = true
     jenkins.vm.provision :salt do |salt|
       salt.minion_id = "jenkins.local"
+      salt.minion_config = "minion-config/minion"
       salt.masterless = true
       salt.run_highstate = true
       salt.log_level = "all"
@@ -325,18 +326,18 @@ Vagrant.configure(2) do |config|
   end
 
 
-#config.vm.define "test" do |test|
-#  test.vm.box = "centos/7"
-#  test.vm.network "private_network", ip: "192.168.2.140"
-#  test.vm.hostname = "test.local"
-#  test.ssh.forward_x11 = true
-#  test.vm.provision :salt do |salt|
-#    salt.minion_id = "test.local"
-#    salt.masterless = true
-#    salt.run_highstate = true
-#    salt.log_level = "all"
-#  end
-#end
+config.vm.define "test" do |test|
+  test.vm.box = "centos/7"
+  test.vm.network "private_network", ip: "192.168.2.140"
+  test.vm.hostname = "test.local"
+  test.ssh.forward_x11 = true
+  test.vm.provision :salt do |salt|
+    salt.minion_id = "test.local"
+    salt.masterless = true
+    salt.run_highstate = true
+    salt.log_level = "all"
+  end
+end
 
 
 #  config.vm.define "workflow" do |workflow|
