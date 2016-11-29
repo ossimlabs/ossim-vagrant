@@ -9,6 +9,7 @@ install-deps:
       - wget
       - curl
       - ant
+      - swig
       - qt-devel
       - nasm
       - maven
@@ -26,6 +27,8 @@ install-deps:
       - podofo-devel
       - geos-devel
       - libcurl-devel
+      - fftw-devel
+      - libjpeg12-turbo-devel
       - libtiff-devel
       - libgeotiff-devel
       - giflib-devel
@@ -38,6 +41,7 @@ install-deps:
       - mesa-libGL-devel
       - mesa-libOSMesa-devel
       - qt5-qtbase-devel
+      - aws-sdk-cpp-devel
 
 usr-local-permissions:
   file.directory:
@@ -87,8 +91,8 @@ build-ossim-shell:
 checkout-ossim:
   git.latest:
     - name: https://github.com/ossimlabs/ossim.git
-    - rev: dev
-    - branch: dev
+    - rev: aws-test
+    - branch: aws-test
     # - force_checkout: true
     # - force_clone: true
     # - force_fetch: true
@@ -112,6 +116,20 @@ checkout-omar:
     - require:
       - pkg: install-deps
 
+checkout-ossim-ci:
+  git.latest:
+    - name: https://github.com/ossimlabs/ossim-ci.git
+    - rev: dev
+    - branch: dev
+    # - force_checkout: true
+    # - force_clone: true
+    # - force_fetch: true
+    # - force_reset: true
+    - target: /home/vagrant/ossim-ci
+    - user: vagrant
+    - require:
+      - pkg: install-deps
+
 checkout-ossim-gui:
   git.latest:
     - name: https://github.com/ossimlabs/ossim-gui.git
@@ -125,8 +143,8 @@ checkout-ossim-gui:
 checkout-ossim-plugins:
   git.latest:
     - name: https://github.com/ossimlabs/ossim-plugins.git
-    - rev: dev
-    - branch: dev
+    - rev: aws-test
+    - branch: aws-test
     # - force_checkout: true
     # - force_clone: true
     # - force_fetch: true

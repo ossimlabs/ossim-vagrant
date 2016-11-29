@@ -1,5 +1,6 @@
 #!/bin/bash
 export OSSIM_DEV_HOME=~
+export JAVA_HOME=/usr/lib/jvm/java
 export OSSIM_DEPENDENCIES=$OSSIM_DEV_HOME/ossim-dependencies
 export OSSIM_INSTALL_PREFIX=$OSSIM_DEV_HOME/ossim-install
 export OSSIM_BUILD_DIR=$OSSIM_DEV_HOME/build
