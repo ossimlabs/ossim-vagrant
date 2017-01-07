@@ -91,8 +91,8 @@ build-ossim-shell:
 checkout-ossim:
   git.latest:
     - name: https://github.com/ossimlabs/ossim.git
-    - rev: aws-test
-    - branch: aws-test
+    - rev: dev
+    - branch: dev
     # - force_checkout: true
     # - force_clone: true
     # - force_fetch: true
@@ -143,8 +143,8 @@ checkout-ossim-gui:
 checkout-ossim-plugins:
   git.latest:
     - name: https://github.com/ossimlabs/ossim-plugins.git
-    - rev: aws-test
-    - branch: aws-test
+    - rev: dev
+    - branch: dev
     # - force_checkout: true
     # - force_clone: true
     # - force_fetch: true
