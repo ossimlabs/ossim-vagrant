@@ -18,7 +18,7 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder "pillar", "/srv/pillar", type: "nfs"
   config.vm.synced_folder "formulas", "/srv/formulas", type: "nfs"
   config.vm.synced_folder "/data", "/data", type: "nfs"
-  #config.vm.synced_folder "/Volumes/DataDrive/data", "/data", type: "nfs"
+  #config.vm.synced_folder "/Volumes/DataDrive/data", "/data2", type: "nfs"
   config.vm.provider "virtualbox" do |vb|
      vb.customize ["modifyvm", :id, "--memory", "1024"]
 #     vb.customize ["modifyvm", :id, "--name", "MYBOX"]
@@ -298,17 +298,46 @@ Vagrant.configure(2) do |config|
       vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
       vb.name = "vagrant-devBuild"
     end
-   devBuild.vm.box = "centos/7"
-   devBuild.vm.network "private_network", ip: "192.168.2.141"
-   devBuild.vm.hostname = "dev-build.local"
-   devBuild.ssh.forward_x11 = true
-   devBuild.vm.provision :salt do |salt|
+     devBuild.vm.box = "centos/7"
+     devBuild.vm.network "private_network", ip: "192.168.2.141"
+     devBuild.vm.hostname = "dev-build.local"
+     devBuild.ssh.forward_x11 = true
+     devBuild.vm.provision :salt do |salt|
      salt.minion_id = "dev-build.local"
      salt.masterless = true
      salt.run_highstate = true
      salt.log_level = "all"
    end
  end
+
+config.vm.define "mspBuild" do |mspBuild|
+    mspBuild.vm.provider "virtualbox" do |vb|
+      vb.customize ["modifyvm", :id, "--memory", "4096"]
+        # Set the number of virtual CPUs for the virtual machine
+      vb.customize ["modifyvm", :id, "--cpus", "4"]
+      vb.customize ["modifyvm", :id, "--graphicscontroller", "vboxvga"]
+      vb.customize ["modifyvm", :id, "--vram", "128"]
+        # Enabling the I/O APIC is required for 64-bit guest operating systems, especially Windows Vista;
+        # it is also required if you want to use more than one virtual CPU in a VM.
+      vb.customize ["modifyvm", :id, "--ioapic", "on"]
+        # Enable the use of hardware virtualization extensions (Intel VT-x or AMD-V) in the processor of your host system
+      vb.customize ["modifyvm", :id, "--hwvirtex", "on"]
+        # Enable, if Guest Additions are installed, whether hardware 3D acceleration should be available
+      vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
+      vb.name = "vagrant-mspBuild"
+    end
+   mspBuild.vm.box = "centos/7"
+   mspBuild.vm.network "private_network", ip: "192.168.2.142"
+   mspBuild.vm.hostname = "msp-build.local"
+   mspBuild.ssh.forward_x11 = true
+   mspBuild.vm.provision :salt do |salt|
+     salt.minion_id = "msp-build.local"
+     salt.masterless = true
+     salt.run_highstate = true
+     salt.log_level = "all"
+   end
+ end
+
 
   config.vm.define "jenkins", autostart: false do |jenkins|
     jenkins.vm.box = "centos/7"
@@ -327,7 +356,6 @@ Vagrant.configure(2) do |config|
 
 
 config.vm.define "test" do |test|
-  test.vm.box = "centos/7"
   test.vm.network "private_network", ip: "192.168.2.140"
   test.vm.hostname = "test.local"
   test.ssh.forward_x11 = true
