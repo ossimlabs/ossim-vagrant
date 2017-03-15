@@ -12,3 +12,4 @@ install-xll:
       - xcb-util-keysyms
       - xcb-util-wm
       - gtk2
+      - gedit
