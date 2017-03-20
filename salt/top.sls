@@ -69,4 +69,5 @@ base:
 #    - jenkins.ossim-devel-install
   'test.local':
     - java
+    - x11-min
     - ossim-core.yum-repo
