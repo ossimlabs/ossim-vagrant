@@ -18,7 +18,7 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder "pillar", "/srv/pillar", type: "nfs"
   config.vm.synced_folder "formulas", "/srv/formulas", type: "nfs"
   config.vm.synced_folder "/data", "/data", type: "nfs"
-  #config.vm.synced_folder "/Volumes/DataDrive/data", "/data2", type: "nfs"
+  #gconfig.vm.synced_folder "/Volumes/DataDrive/data", "/data2", type: "nfs"
   config.vm.provider "virtualbox" do |vb|
      vb.customize ["modifyvm", :id, "--memory", "1024"]
 #     vb.customize ["modifyvm", :id, "--name", "MYBOX"]
@@ -327,7 +327,7 @@ config.vm.define "mspBuild", autostart: false do |mspBuild|
       vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
       vb.name = "vagrant-mspBuild"
     end
-   mspBuild.vm.synced_folder "#{ENV['MSP_HOME']}", "/msp", type: "nfs"
+   mspBuild.vm.synced_folder "#{ENV['MSP_MOUNT']}", "/msp", type: "nfs"
    mspBuild.vm.box = "centos/7"
    mspBuild.vm.network "private_network", ip: "192.168.2.142"
    mspBuild.vm.hostname = "msp-build.local"
