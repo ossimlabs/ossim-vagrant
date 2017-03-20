@@ -1,5 +1,5 @@
 #!/bin/bash
-export OSSIM_DEV_HOME=~
+export OSSIM_DEV_HOME=~/ossimlabs
 export JAVA_HOME=/usr/lib/jvm/java
 export MSP_HOME=/msp/ToolKit
 export MSP_DATA_DIR=$MSP_HOME/data

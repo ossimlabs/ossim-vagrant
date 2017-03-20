@@ -54,7 +54,7 @@ usr-local-permissions:
 
 ossim-preferences:
   file.managed:
-    - name: /home/vagrant/ossim-preferences
+    - name: /home/vagrant/ossimlabs/ossim-preferences
     - source: salt://dev-build/ossim-preferences
     - user: vagrant
     - group: vagrant
@@ -62,7 +62,7 @@ ossim-preferences:
 
 build-env-shell:
   file.managed:
-    - name: /home/vagrant/build-env.sh
+    - name: /home/vagrant/ossimlabs/build-env.sh
     - source: salt://dev-build/build-env.sh
     - user: vagrant
     - group: vagrant
@@ -70,7 +70,7 @@ build-env-shell:
 
 build-deps-shell:
   file.managed:
-    - name: /home/vagrant/build-deps.sh
+    - name: /home/vagrant/ossimlabs/build-deps.sh
     - source: salt://dev-build/build-deps.sh
     - user: vagrant
     - group: vagrant
@@ -80,7 +80,7 @@ build-deps-shell:
 
 build-ossim-shell:
   file.managed:
-    - name: /home/vagrant/build-ossim.sh
+    - name: /home/vagrant/ossimlabs/build-ossim.sh
     - source: salt://dev-build/build-ossim.sh
     - user: vagrant
     - group: vagrant
@@ -97,7 +97,7 @@ checkout-ossim:
     # - force_clone: true
     # - force_fetch: true
     # - force_reset: true
-    - target: /home/vagrant/ossim
+    - target: /home/vagrant/ossimlabs/ossim
     - user: vagrant
     - require:
       - pkg: install-deps
@@ -111,7 +111,7 @@ checkout-omar:
     # - force_clone: true
     # - force_fetch: true
     # - force_reset: true
-    - target: /home/vagrant/omar
+    - target: /home/vagrant/ossimlabs/omar
     - user: vagrant
     - require:
       - pkg: install-deps
@@ -125,7 +125,7 @@ checkout-ossim-ci:
     # - force_clone: true
     # - force_fetch: true
     # - force_reset: true
-    - target: /home/vagrant/ossim-ci
+    - target: /home/vagrant/ossimlabs/ossim-ci
     - user: vagrant
     - require:
       - pkg: install-deps
@@ -135,7 +135,7 @@ checkout-ossim-gui:
     - name: https://github.com/ossimlabs/ossim-gui.git
     - rev: dev
     - branch: dev
-    - target: /home/vagrant/ossim-gui
+    - target: /home/vagrant/ossimlabs/ossim-gui
     - user: vagrant
     - require:
       - pkg: install-deps
@@ -149,7 +149,7 @@ checkout-ossim-plugins:
     # - force_clone: true
     # - force_fetch: true
     # - force_reset: true
-    - target: /home/vagrant/ossim-plugins
+    - target: /home/vagrant/ossimlabs/ossim-plugins
     - user: vagrant
     - require:
       - pkg: install-deps
@@ -159,7 +159,7 @@ checkout-ossim-oms:
     - name: https://github.com/ossimlabs/ossim-oms.git
     - rev: dev
     - branch: dev
-    - target: /home/vagrant/ossim-oms
+    - target: /home/vagrant/ossimlabs/ossim-oms
     - user: vagrant
     - require:
       - pkg: install-deps
@@ -173,7 +173,7 @@ checkout-ossim-video:
     # - force_clone: true
     # - force_fetch: true
     # - force_reset: true
-    - target: /home/vagrant/ossim-video
+    - target: /home/vagrant/ossimlabs/ossim-video
     - user: vagrant
     - require:
       - pkg: install-deps
@@ -187,7 +187,7 @@ checkout-ossim-planet:
     # - force_clone: true
     # - force_fetch: true
     # - force_reset: true
-    - target: /home/vagrant/ossim-planet
+    - target: /home/vagrant/ossimlabs/ossim-planet
     - user: vagrant
     - require:
       - pkg: install-deps
@@ -201,7 +201,7 @@ checkout-ossim-wms:
     # - force_clone: true
     # - force_fetch: true
     # - force_reset: true
-    - target: /home/vagrant/ossim-wms
+    - target: /home/vagrant/ossimlabs/ossim-wms
     - user: vagrant
     - require:
       - pkg: install-deps
@@ -211,7 +211,7 @@ checkout-open-scene-graph:
     - name: https://github.com/openscenegraph/OpenSceneGraph.git
     - rev: OpenSceneGraph-3.2
     - branch: OpenSceneGraph-3.2
-    - target: /home/vagrant/OpenSceneGraph-3.2
+    - target: /home/vagrant/ossimlabs/OpenSceneGraph-3.2
     - user: vagrant
     # - force_checkout: true
     # - force_clone: true
@@ -225,7 +225,7 @@ checkout-ffmpeg:
     - name: https://github.com/FFmpeg/FFmpeg.git
     - rev: release/3.0
     - branch: release/3.0
-    - target: /home/vagrant/ffmpeg-3.0
+    - target: //home/vagrant/ossimlabs/ffmpeg-3.0
     - user: vagrant
     - require:
       - pkg: install-deps
