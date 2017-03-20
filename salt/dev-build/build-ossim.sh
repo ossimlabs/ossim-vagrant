@@ -38,7 +38,7 @@ export BUILD_OSSIM_WMS=ON
 export BUILD_OSSIM_PLANET=ON
 export BUILD_POTRACE_PLUGIN=OFF
 export BUILD_AWS_PLUGIN=ON
-if [ -d $OSSIM_DEV_HOME/msp-1.5 ] ; then
+if [ -d $MSP_HOME ] ; then
    export BUILD_CSM_PLUGIN=ON
 else
    export BUILD_CSM_PLUGIN=OFF
