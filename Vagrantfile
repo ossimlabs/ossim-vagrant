@@ -310,7 +310,8 @@ Vagrant.configure(2) do |config|
    end
  end
 
-config.vm.define "mspBuild" do |mspBuild|
+config.vm.define "mspBuild", autostart: false do |mspBuild|
+
     mspBuild.vm.provider "virtualbox" do |vb|
       vb.customize ["modifyvm", :id, "--memory", "4096"]
         # Set the number of virtual CPUs for the virtual machine
@@ -326,6 +327,7 @@ config.vm.define "mspBuild" do |mspBuild|
       vb.customize ["modifyvm", :id, "--accelerate3d", "on"]
       vb.name = "vagrant-mspBuild"
     end
+   mspBuild.vm.synced_folder "#{ENV['MSP_HOME']}", "/msp", type: "nfs"
    mspBuild.vm.box = "centos/7"
    mspBuild.vm.network "private_network", ip: "192.168.2.142"
    mspBuild.vm.hostname = "msp-build.local"
