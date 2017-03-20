@@ -38,6 +38,10 @@ export BUILD_OSSIM_WMS=ON
 export BUILD_OSSIM_PLANET=ON
 export BUILD_POTRACE_PLUGIN=OFF
 export BUILD_AWS_PLUGIN=ON
-export BUILD_CSM_PLUGIN=ON
+if [ -d $OSSIM_DEV_HOME/msp-1.5 ] ; then
+   export BUILD_CSM_PLUGIN=ON
+else
+   export BUILD_CSM_PLUGIN=OFF
+fi
 #export OSSIM_BUILD_ADDITIONAL_DIRECTORIES=$OSSIM_DEV_HOME/ossim-private/ossim-kakadu-jpip-server
 $OSSIM_DEV_HOME/ossim/scripts/build.sh
