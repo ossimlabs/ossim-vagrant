@@ -1,5 +1,5 @@
 elevation_manager.elevation_source1.type: dted_directory
-elevation_manager.elevation_source1.connection_string: /data/elevation/dted/1k
+elevation_manager.elevation_source1.connection_string: /data/elevation/dted/level0
 elevation_manager.elevation_source1.min_open_cells: 5
 elevation_manager.elevation_source1.max_open_cells: 25
 elevation_manager.elevation_source1.enabled: true
@@ -35,6 +35,7 @@ epsg_database_file4: $(OSSIM_DEV_HOME)/ossim/share/ossim/projection/ossim_harn_s
 wkt_database_file: $(OSSIM_DEV_HOME)/ossim/share/ossim/projection/ossim_wkt_pcs.csv
 
 plugin1.file: $(OSSIM_BUILD_DIR)/lib64/libossim_sqlite_plugin.so
+plugin2.file: $(OSSIM_BUILD_DIR)/lib64/libossim_csm3_plugin.so
 plugin5.file: $(OSSIM_BUILD_DIR)/lib64/libossim_opencv_plugin.so
 plugin10.file: $(OSSIM_BUILD_DIR)/lib64/libossim_hdf5_plugin.so
 plugin15.file: $(OSSIM_BUILD_DIR)/lib64/libossim_kakadu_plugin.so
@@ -75,4 +76,5 @@ tile_size: 64 64
 cache_size:512
 kakadu_threads: 8
 
+csm3_plugin_path: $(MSP_HOME)/plugins
 
