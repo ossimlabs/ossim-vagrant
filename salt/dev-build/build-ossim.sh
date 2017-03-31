@@ -40,6 +40,7 @@ export BUILD_POTRACE_PLUGIN=OFF
 export BUILD_AWS_PLUGIN=ON
 if [ -d $MSP_HOME ] ; then
    export BUILD_CSM_PLUGIN=ON
+   export BUILD_MSP_PLUGIN=ON
 else
    export BUILD_CSM_PLUGIN=OFF
 fi
