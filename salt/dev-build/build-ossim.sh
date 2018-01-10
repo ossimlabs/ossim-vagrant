@@ -1,5 +1,5 @@
 #!/bin/bash
-pushd `dirname $0` >/dev/null
+pushd `dirname ${BASH_SOURCE[0]}` >/dev/null
 export SCRIPT_DIR=`pwd -P`
 . $SCRIPT_DIR/build-env.sh
 popd >/dev/null

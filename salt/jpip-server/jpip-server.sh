@@ -7,7 +7,7 @@ export JPIP_PORT={{jpip_port}}
 export JPIP_ADDRESS={{jpip_address}}
 export JPIP_CONNECTION_THREADS={{jpip_connection_threads}}
 export JPIP_MAX_RATE=40000000
-pushd `dirname $0` > /dev/null
+pushd `dirname ${BASH_SOURCE[0]}` > /dev/null
 export SCRIPT_DIR=`pwd -P`
 popd >/dev/null
 
