@@ -54,6 +54,12 @@ base:
     - x11-min
     - omar-user
     - dev-build
+  'dev-build-fed.local':
+    - java
+    - ossim-core.yum-repo
+    - x11-min
+    - omar-user
+    - dev-build-fed
   'msp-build.local':
     - java
     - ossim-core.yum-repo
@@ -68,6 +74,6 @@ base:
     - jenkins.plugins
 #    - jenkins.ossim-devel-install
   'test.local':
-    - java
-    - x11-min
+#    - java
+#    - x11-min
     - ossim-core.yum-repo
