@@ -1,9 +1,10 @@
 #!/bin/bash
 export OSSIM_DEV_HOME=~/ossimlabs
+export OSSIM_DATA=/data
 export JAVA_HOME=/usr/lib/jvm/java
 export MSP_HOME=/msp/ToolKit
 export MSP_DATA_DIR=$MSP_HOME/data
-export CSM_PLUGIN_DIR=$MSP_HOME/plugins
+export CSM_PLUGIN_DIR=$MSP_HOME/plugins/
 export OSSIM_DEPENDENCIES=$OSSIM_DEV_HOME/ossim-dependencies
 export OSSIM_INSTALL_PREFIX=$OSSIM_DEV_HOME/ossim-install
 export OSSIM_BUILD_DIR=$OSSIM_DEV_HOME/build
