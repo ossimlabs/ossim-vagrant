@@ -42,7 +42,11 @@ install-deps:
       - mesa-libOSMesa-devel
       - qt5-qtbase-devel
       - aws-sdk-cpp-core-devel
+      - aws-sdk-cpp-core
+      - aws-sdk-cpp-s3
       - aws-sdk-cpp-s3-devel
+      - jsoncpp-devel
+      - opencv-devel
 
 usr-local-permissions:
   file.directory:
@@ -100,6 +104,21 @@ build-ossim-shell:
     - mode: 755
     - require:
       - file: build-env-shell
+
+checkout-ossim:
+  git.latest:
+    - name: https://github.com/ossimlabs/ossim.git
+    - rev: dev
+    - branch: dev
+    # - force_checkout: true
+    # - force_clone: true
+    # - force_fetch: true
+    # - force_reset: true
+    - target: /home/vagrant/ossimlabs/ossim
+    - user: vagrant
+    - require:
+      - pkg: install-deps
+      - file: home-ossimlabs-permissions
 
 
 checkout-omar:
