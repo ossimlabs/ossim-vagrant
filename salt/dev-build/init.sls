@@ -41,7 +41,8 @@ install-deps:
       - mesa-libGL-devel
       - mesa-libOSMesa-devel
       - qt5-qtbase-devel
-      - aws-sdk-cpp-devel
+      - aws-sdk-cpp-core-devel
+      - aws-sdk-cpp-s3-devel
 
 usr-local-permissions:
   file.directory:
@@ -52,6 +53,14 @@ usr-local-permissions:
       - user
       - group
 
+home-ossimlabs-permissions:
+  file.directory:
+    - name: /home/vagrant/ossimlabs
+    - user: vagrant
+    - group: vagrant
+    - mode: 775
+    - makedirs: True
+
 ossim-preferences:
   file.managed:
     - name: /home/vagrant/ossimlabs/ossim-preferences
@@ -59,6 +68,8 @@ ossim-preferences:
     - user: vagrant
     - group: vagrant
     - mode: 644
+    - require:
+      - file: home-ossimlabs-permissions
 
 build-env-shell:
   file.managed:
@@ -67,6 +78,8 @@ build-env-shell:
     - user: vagrant
     - group: vagrant
     - mode: 755
+    - require:
+      - file: home-ossimlabs-permissions
 
 build-deps-shell:
   file.managed:
@@ -88,19 +101,6 @@ build-ossim-shell:
     - require:
       - file: build-env-shell
 
-checkout-ossim:
-  git.latest:
-    - name: https://github.com/ossimlabs/ossim.git
-    - rev: dev
-    - branch: dev
-    # - force_checkout: true
-    # - force_clone: true
-    # - force_fetch: true
-    # - force_reset: true
-    - target: /home/vagrant/ossimlabs/ossim
-    - user: vagrant
-    - require:
-      - pkg: install-deps
 
 checkout-omar:
   git.latest:
@@ -115,6 +115,7 @@ checkout-omar:
     - user: vagrant
     - require:
       - pkg: install-deps
+      - file: home-ossimlabs-permissions
 
 checkout-ossim-ci:
   git.latest:
@@ -129,6 +130,7 @@ checkout-ossim-ci:
     - user: vagrant
     - require:
       - pkg: install-deps
+      - file: home-ossimlabs-permissions
 
 checkout-ossim-gui:
   git.latest:
@@ -139,6 +141,7 @@ checkout-ossim-gui:
     - user: vagrant
     - require:
       - pkg: install-deps
+      - file: home-ossimlabs-permissions
 
 checkout-ossim-plugins:
   git.latest:
@@ -153,6 +156,7 @@ checkout-ossim-plugins:
     - user: vagrant
     - require:
       - pkg: install-deps
+      - file: home-ossimlabs-permissions
 
 checkout-ossim-oms:
   git.latest:
@@ -163,6 +167,7 @@ checkout-ossim-oms:
     - user: vagrant
     - require:
       - pkg: install-deps
+      - file: home-ossimlabs-permissions
 
 checkout-ossim-video:
   git.latest:
@@ -177,6 +182,7 @@ checkout-ossim-video:
     - user: vagrant
     - require:
       - pkg: install-deps
+      - file: home-ossimlabs-permissions
 
 checkout-ossim-planet:
   git.latest:
@@ -191,6 +197,7 @@ checkout-ossim-planet:
     - user: vagrant
     - require:
       - pkg: install-deps
+      - file: home-ossimlabs-permissions
 
 checkout-ossim-wms:
   git.latest:
@@ -205,6 +212,7 @@ checkout-ossim-wms:
     - user: vagrant
     - require:
       - pkg: install-deps
+      - file: home-ossimlabs-permissions
 
 checkout-open-scene-graph:
   git.latest:
@@ -219,6 +227,7 @@ checkout-open-scene-graph:
     # - force_reset: true
     - require:
       - pkg: install-deps
+      - file: home-ossimlabs-permissions
 
 checkout-ffmpeg:
   git.latest:
@@ -229,3 +238,4 @@ checkout-ffmpeg:
     - user: vagrant
     - require:
       - pkg: install-deps
+      - file: home-ossimlabs-permissions
